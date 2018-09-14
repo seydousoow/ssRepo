@@ -1,0 +1,799 @@
+/*************************page loader **************************************/
+
+/* Paste this css to your style sheet file or under head tag */
+
+/* This only works with JavaScript, 
+if it's not present, don't show loader */
+
+@import url(https: //fonts.googleapis.com/css?family=Droid+Sans);
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('../source/images/loader/Eclipse-0.8s-200px.gif') 50% 50% no-repeat;
+    background-color: #d9f5ff;
+}
+
+/*********************************Go back up button**********************************/
+
+#return-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    background: blueviolet;
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+    background-color: royalblue;
+}
+
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
+}
+
+/***********************************login-form**************************************/
+
+#login-main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    background-image: url("../source/images/background/water-background.png");
+    background-repeat: no-repeat;
+    /*    make the footer sticky*/
+    margin-bottom: -40px;
+}
+
+#login-form-container {
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 115px;
+}
+
+#login-form-container img {
+    position: relative;
+    align-self: center
+}
+
+#login-form-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-form-container p {
+    font-family: playfair display, georgia;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1B8EBD;
+    margin-top: 19px;
+}
+
+#login-form-container form label {
+    font-family: playfair display, georgia;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #1B8EBD;
+    display: none
+}
+
+#login-form-container form input {
+    border: 0px;
+    border-bottom: 1.5px solid aquamarine;
+    height: 40px;
+    font-family: georgia;
+    font-size: 17px;
+    color: darkblue;
+    margin-bottom: 23px;
+    border-radius: 50px;
+    padding-left: 25px;
+}
+
+#login-form-container form input:hover,
+#login-form-container form input:active,
+#login-form-container form input:focus {
+    border-bottom-color: mediumslateblue;
+    border-bottom-width: 1.5px;
+}
+
+#login-form-container form input:last-child {
+    border: 0px;
+    padding: 0px;
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: georgia;
+}
+
+/**************************************header ***********************************/
+
+#nav-logo {
+    width: 90px;
+    height: 70px;
+    margin-right: 50px;
+    margin-left: 40px;
+}
+
+/**************************************footer ***********************************/
+
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    position: sticky;
+    bottom: 0;
+}
+
+footer div:last-child {
+    background-color: #272727;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 30px
+}
+
+.copyright {
+    width: 450px;
+    /*    margin-top: 6px;*/
+}
+
+.powered {
+    width: 450px;
+    /*    margin-top: 6px;*/
+}
+
+/*************************************** delivery page **************************************/
+
+.delivery_employe_container {
+    width: 80%;
+    position: relative;
+    left: 10%;
+    background-color: #F2F2F2;
+    margin-top: 30px
+}
+
+#delivery_list_table thead tr th {
+    cursor: pointer;
+}
+
+#delivery_list_table thead tr th:hover {
+    background-color: #E9E9E9;
+}
+
+#list-delivery-caption {
+    color: blue;
+    text-align: center;
+    font-family: georgia, times new roman, times;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: underline;
+    caption-side: top
+}
+
+.delivery-employe-title {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    color: blueviolet;
+    text-align: center;
+    font-family: georgia, times new roman, times;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: underline;
+    caption-side: top;
+}
+
+.new-emplo-input-group {
+    width: 100%;
+    border-radius: 31px;
+    margin-bottom: 16px;
+    padding-bottom: 0px;
+}
+
+.new-emplo-input-group input {
+    background: #fff;
+    border-radius: 31px;
+    font-family: Ubuntu-Bold;
+    font-size: 20px;
+    color: #8f8fa1;
+    border: 0px;
+    height: 50px;
+    width: 97%;
+    padding-left: 35px;
+}
+
+.new-emplo-input-group select {
+    background: #fff;
+    font-family: Ubuntu-Bold;
+    font-size: 20px;
+    color: #8f8fa1;
+    border: 0px;
+    height: 50px;
+    width: 94%;
+    margin-left: 28px;
+}
+
+.new-emplo-input-group:first-child,
+.new-emplo-input-group:first-child input {
+    background-color: aquamarine;
+}
+
+.new-emp-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submit_new_emp {
+
+    margin-bottom: 15px;
+    position: relative;
+    float: right;
+    margin-right: 35px;
+    width: 130px;
+    height: 50px;
+    border-radius: 100px;
+    font-size: 25px;
+    font-family: Ubuntu-Bold;
+    font-weight: 900;
+
+}
+
+#edit-emp-container {
+    /*    background-color: cyan;*/
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.edit-cont {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    align-items: center;
+}
+
+#msg {
+    background: #fff;
+    border-radius: 31px;
+    font-family: Ubuntu-Bold;
+    font-size: 18px;
+    color: #8f8fa1;
+    border: 0px;
+    height: 50px;
+    width: 300px;
+    padding-left: 35px;
+}
+
+.edit-input-group {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    width: auto;
+    font-family: Ubuntu-Bold;
+    font-size: 23px;
+    color: blueviolet;
+}
+
+#edit-result {
+    width: 90%;
+    height: 300px;
+    overflow: auto;
+    background-color: white;
+}
+
+#edit-result table {
+    cursor: pointer
+}
+
+#new-delivery-main-container {
+    width: 90%;
+    position: relative;
+    left: 5%;
+    margin-top: 15px;
+    background-color: white;
+    overflow: auto;
+    z-index: 0;
+}
+
+#new-delivery-main-container .delivery-employe-title {
+    background-color: whitesmoke;
+}
+
+#new-delivery-container table {
+    table-layout: fixed;
+}
+
+#new-delivery-container table caption {
+    caption-side: top;
+    width: 100%;
+    font-family: Ubuntu-Bold;
+    font-size: 23px;
+    margin-top: -15px;
+}
+
+#second-delivery-table-container {
+    overflow: auto;
+}
+
+.thead-liv {
+    width: 200px;
+}
+
+.thead-liv:last-child {
+    width: 90px;
+}
+
+.row-btn > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+textarea.form-control {
+    font-size: 14px;
+    font-family: ubuntu-bold;
+    color: darkblue;
+    height: auto !important;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    position: fixed !important;
+    left: 30% !important;
+    z-index: 1050 !important;
+    display: none;
+    overflow: hidden !important;
+    outline: 0 !important;
+    top: 140px !important;
+    width: 40% !important;
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/***************************************************view delivery page ***************************************************/
+
+.flatpickr {
+    justify-content: center;
+    display: flex;
+}
+
+#flatpickr {
+    width: 300px;
+    font-size: x-large;
+    font-family: georgia;
+    background-color: darkcyan;
+    color: greenyellow;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#flatpickr::placeholder {
+    color: greenyellow;
+    opacity: 1;
+    /* Firefox */
+}
+
+#flatpickr:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: greenyellow;
+}
+
+#flatpickr::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: greenyellow;
+}
+
+#view_delivery_container {
+    width: 97%;
+    position: relative;
+    left: 1.5%
+}
+
+#view_delivery_container > table > thead > tr {
+    text-align: center;
+}
+
+#view_delivery_container > table > thead,
+#view_delivery_container > table > tbody > tr > .theadY-liv {
+    background-color: darkcyan;
+    color: greenyellow;
+    width: 470px;
+    text-align: center;
+    vertical-align: middle
+}
+
+#view_delivery_container > table > thead > tr > th:first-child {
+    background-color: #72DBFF;
+    border-top: 2px solid #72DBFF;
+    border-left: 2px solid #72DBFF;
+}
+
+#view_delivery_container > table {
+    border: 0px;
+}
+
+.total-cell {
+    width: 170px;
+}
+
+/******************************************** absence page *******************************************/
+
+.absence-form {
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35) !important;
+    border-radius: 10px !important;
+    border: 6px solid #305A72 !important;
+    width: 600px !important;
+    padding: 10px !important;
+}
+
+.absence-form > div > input {
+    background-color: #305A72 !important;
+    color: white;
+    width: 100% !important;
+}
+
+.absence-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 50px !important;
+    width: 100% !important;
+    background-color: #305A72 !important;
+    margin: 0px !important;
+    border-radius: inherit;
+    padding-left: 26px;
+    color: white !important;
+}
+
+.absence-form > div > input::placeholder,
+.absence-select::placeholder,
+#motif-absence::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1;
+    /*firefox*/
+}
+
+.absence-form > div > input:-ms-input-placeholder,
+.absence-select:-ms-input-placeholder,
+#motif-absence:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: red;
+}
+
+.absence-form > div > input:-ms-input-placeholder,
+.absence-select:-ms-input-placeholder,
+#motif-absence:-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: red;
+}
+
+#motif-absence {
+    width: 100%;
+    border-radius: 15px;
+    height: 150px;
+    margin-bottom: 10px;
+    background-color: #305A72;
+    color: white;
+    padding: 5px 16px;
+    font-size: 16px;
+    font-family: georgia, times, times new roman, serif;
+}
+
+.absence-search {
+    width: 100% !important;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35) !important;
+    border-radius: 10px !important;
+    border: 6px solid #305A72 !important;
+    width: 600px !important;
+    padding: 10px !important;
+    margin-top: 20px;
+    height: 100%;
+}
+
+.search-absence-hr {
+    border: 4px dotted #305A72;
+    width: 96%;
+    margin: 5px;
+}
+
+.submit_new_absence {
+    background-color: #375a72;
+    border-color: #375a72;
+    float: right;
+    border-radius: 8px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-family: georgia, times, serif;
+}
+
+/************************************** view weekly absence ********************************/
+
+.table-absence {
+    width: 95%;
+    position: relative;
+    left: 2.5%;
+    border: 5px solid #375a72;
+    table-layout: fixed;
+}
+
+.table-absence caption {
+    caption-side: top;
+    border: 5px solid #375a72;
+    border-bottom: 0px;
+    text-align: center;
+    color: aqua;
+    background-color: #375a72;
+    font-size: 40px;
+    font-weight: 800;
+    font-family: bodoni MT, georgia, times, serif;
+}
+
+.table-absence > thead > tr {
+    background-color: aqua;
+    border: 3px solid #375a72;
+    color: #375a72;
+    text-align: center;
+}
+
+.table-absence > thead > tr > th {
+    border-right: 2px dotted #375a72;
+}
+
+.td-no-absence {
+    border: 3px solid #375a72 !important;
+    text-align: center;
+    vertical-align: middle !important;
+    font-size: 16px;
+    font-family: book antiqua, georgia, times, serif;
+    font-weight: 600;
+    background-color: #00FFFF;
+    color: #375a72;
+}
+
+.hr-absence {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    width: 46px;
+    background-color: #375a72;
+    height: 1px;
+}
+
+.span_absence {
+    font-size: 19px;
+    font-family: Century Gothic, Gill Sans MT;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-align: left
+}
+
+.td-absence {
+    font-size: 16px;
+    font-family: book antiqua, georgia, times, serif;
+    font-weight: 600;
+    color: #375a72;
+    border: 3px solid #375a72 !important;
+    text-align: left;
+    background-color: #00FFFF;
+}
+
+.absence-span1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.hr-absence2:last-child {
+    display: none;
+}
+
+.hr-absence2 {
+    border-top-width: 0px;
+    margin-top: 12px;
+    background-color: #375a72;
+    height: 3px;
+    width: 105%;
+    margin-left: -5px;
+}
+
+/*************************************************overtime view page *************************************/
+
+#monthSelection {
+    margin-top: 12px;
+}
+
+#monthSelection > div > input {
+    width: 200px;
+    flex: none;
+    text-align: center;
+    height: 46px;
+    color: #375a72;
+    font-size: 24px;
+    font-family: times, georgia, serif;
+}
+
+#monthSelection >div {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.month-change-btn {
+    cursor: pointer;
+}
+
+#overtime-month-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#overtime-month-table {
+    width: 1000px;
+    background-color: whitesmoke;
+}
+
+#overtime-month-table thead tr {
+    background-color: #375A72;
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+    font-family: bodoni MT, georgia, times, serif;
+    font-size: 23px;
+    font-weight: 500;
+}
+
+#overtime-month-table thead tr th {
+    border: 2px solid white;
+}
+
+#overtime-month-table thead tr th:nth-of-type(1) {
+    width: 135px;
+}
+
+#overtime-month-table thead tr th:nth-of-type(2) {
+    width: 220px;
+}
+
+#overtime-month-table thead tr th:nth-of-type(3) {
+    width: 220px;
+}
+
+#overtime-month-table thead tr th:nth-of-type(4) {
+    width: 120px;
+}
+
+#overtime-month-table thead tr th:nth-of-type(5) {
+    width: 240px;
+}
+
+#overtime-month-table tbody tr {
+    border: 2px solid white;
+    font-family: times, bodoni MT, georgia, times, serif;
+    font-size: 18px;
+    color: #375a72;
+    font-weight: 600;
+}
+
+#overtime-month-table tbody tr td {
+    border: 2px solid white;
+}
+
+.month-change-btn {
+    background-color: white;
+    color: blueviolet;
+
+}
+
+.showbtn {
+    -moz-box-shadow: inset 0px 1px 27px 5px #e184f3;
+    -webkit-box-shadow: inset 0px 1px 27px 5px #e184f3;
+    box-shadow: inset 0px 1px 27px 5px #e184f3;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd));
+    background: -moz-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+    background: -webkit-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+    background: -o-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+    background: -ms-linear-gradient(top, #c123de 5%, #a20dbd 100%);
+    background: linear-gradient(to bottom, #c123de 5%, #a20dbd 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd', GradientType=0);
+    background-color: #c123de;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    border: 1px solid #a511c0;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Georgia;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 7px 15px;
+    text-decoration: none;
+    text-shadow: 6px 5px 16px #9b14b3;
+}
+
+.showbtn:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de));
+    background: -moz-linear-gradient(top, #a20dbd 5%, #c123de 100%);
+    background: -webkit-linear-gradient(top, #a20dbd 5%, #c123de 100%);
+    background: -o-linear-gradient(top, #a20dbd 5%, #c123de 100%);
+    background: -ms-linear-gradient(top, #a20dbd 5%, #c123de 100%);
+    background: linear-gradient(to bottom, #a20dbd 5%, #c123de 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de', GradientType=0);
+    background-color: #a20dbd;
+}
+
+.showbtn:active {
+    position: relative;
+    top: 1px;
+}
