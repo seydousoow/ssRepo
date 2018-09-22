@@ -1,0 +1,5 @@
+{
+    "workbench.colorTheme": "Visual Studio Dark",
+    "php.executablePath": "/usr/bin/php",
+    "explorer.confirmDelete": false
+}
