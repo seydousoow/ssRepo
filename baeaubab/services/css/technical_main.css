@@ -102,6 +102,12 @@ footer div:last-child {
 }
 
 /*************************************** treatment system control **********************/
+
+.tg-wrap {
+    margin-top: 30px;
+}
+
+
 .tg-wrap:first-child {
     margin-bottom: 30px
 }
@@ -123,7 +129,7 @@ footer div:last-child {
     overflow: auto;
     word-break: normal;
     border-color: #999;
-    color: #444;
+    color: black;
     background-color: #F7FDFA;
 }
 
@@ -162,22 +168,47 @@ footer div:last-child {
     border-color: #375a72;
     text-align: center
 }
-
-.tg-nn11:nth-child(1) {
-    width: 40%;
+td .tg-0lax:first-child{
+    text-align: center
 }
 
 .tg-nn11:nth-child(2) {
-    width: 15%;
+    width: 40%;
 }
 
 .tg-nn11:nth-child(3) {
-    width: 17%;
+    width: 15%;
 }
 
 .tg-nn11:nth-child(4) {
+    width: 17%;
+}
+
+.tg-nn11:nth-child(5) {
     width: 7%;
 }
+
+.tg-nn11:nth-child(1){
+    width: 150px;
+}
+
+
+.tg-nn111:nth-child(1) {
+    width: 40%;
+}
+
+.tg-nn111:nth-child(2) {
+    width: 15%;
+}
+
+.tg-nn111:nth-child(3) {
+    width: 17%;
+}
+
+.tg-nn111:nth-child(4) {
+    width: 7%;
+}
+
 
 .tg .tg-kqiv {
     font-weight: bold;
@@ -267,6 +298,17 @@ footer div:last-child {
     text-align: left;
     vertical-align: top;
     padding: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: black;
+    text-align: center;
+}
+
+.tg .tg-0lax{
+    color: black;
+    text-align: center
 }
 
 @media screen and (max-width: 767px) {
@@ -288,10 +330,18 @@ footer div:last-child {
 .control1,
 .control2 {
     width: 100%;
-    background-color: transparent;
+    background-color: #D2E4FC;
     border: 0px;
     color: black;
     padding-left: 5px
+}
+
+.treatmentDivContainer {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    margin: 32px 200px 20px 0px;
 }
 
 /************************************production monitoring sheet **********************/
@@ -861,13 +911,23 @@ footer div:last-child {
     vertical-align: top
 }
 
+#updateStockBtn {
+    position: relative;
+    top: 90px;
+    left: 22%;
+    color: whitesmoke !important;
+    font-size: larger;
+    font-weight: 600;
+    background-color: #2D5068;
+}
+
 #stock-legend {
     width: 500px;
     height: auto;
     position: relative;
     float: right;
-    right: 200px;
-    top: 100px;
+    right: 20%;
+    top: 70px;
 }
 
 #stock-legend fieldset {

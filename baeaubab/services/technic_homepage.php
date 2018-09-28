@@ -93,6 +93,20 @@
                 require_once('source/include/technic_pages/add_treatment_system_control.php');
             if(isset($_GET['action']) && $_GET['action'] == "view")
                 require_once('source/include/technic_pages/view_treatment_system_control.php');                
+        }
+        else if(isset($_GET['maintenance'])){
+            if(isset($_GET['section']) && $_GET['section'] == 'disinfection'){
+                if( isset($_GET['action']) && $_GET['action'] == "add")
+                    require_once("source/include/technic_pages/add_new_desinfection.php");
+                if( isset($_GET['action']) && $_GET['action'] == "add")
+                    require_once("source/include/technic_pages/view_desinfection.php");
+            }
+            else if(isset($_GET['section']) && $_GET['section'] == "mat_prod"){
+                if( isset($_GET['action']) && $_GET['action'] == "add")
+                    require_once("source/include/technic_pages/add_used_materials_and_products.php");
+                if( isset($_GET['action']) && $_GET['action'] == "add")
+                    require_once("source/include/technic_pages/view_material_and_product.php");
+            }
         }    
 
         ?>

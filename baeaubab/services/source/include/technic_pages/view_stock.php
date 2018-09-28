@@ -50,7 +50,26 @@ while($data = $req->fetch(PDO::FETCH_ASSOC))
     </tr>
 </table>
 
-<button type="button" class="btn btn-success" id="updateStockBtn">Mettre a jour</button>
+<div id="stock-legend">
+    <fieldset>
+        <legend>Légende : Stock de pre&#769;forme</legend>
+        <div class="legend-container">
+            <div class="rectangle_legende" style="background-color:red;"></div>
+            <p>Le niveau de stock est faible (infe&#769;rieur a&#769; 10000)</p>
+        </div>
+        <div class="legend-container">
+            <div class="rectangle_legende"  style="background-color:orange"></div>
+            <p>Le niveau de stock est moyen (entre 10000 et 50000)</p>
+        </div>
+        <div class="legend-container">
+            <div class="rectangle_legende" style="background-color:green"></div>
+            <p>Le niveau de stock est bon (supe&#769;rieur a&#769; 50000)</p>
+        </div>
+    </fieldset>
+
+</div>
+
+<button type="button" class="btn btn-success" id="updateStockBtn">Mettre à jour</button>
 
 <script>
     $("#updateStockBtn").on('click', function () {
@@ -70,21 +89,3 @@ while($data = $req->fetch(PDO::FETCH_ASSOC))
         }
     });
 </script>
-<div id="stock-legend">
-    <fieldset>
-        <legend>Légende : Stock de pre&#769;forme</legend>
-        <div class="legend-container">
-            <div class="rectangle_legende" style="background-color:red;"></div>
-            <p>Le niveau de stock est faible (infe&#769;rieur a&#769; 10000)</p>
-        </div>
-        <div class="legend-container">
-            <div class="rectangle_legende"  style="background-color:orange"></div>
-            <p>Le niveau de stock est moyen (entre 10000 et 50000)</p>
-        </div>
-        <div class="legend-container">
-            <div class="rectangle_legende" style="background-color:green"></div>
-            <p>Le niveau de stock est bon (supe&#769;rieur a&#769; 50000)</p>
-        </div>
-    </fieldset>
-
-</div>
