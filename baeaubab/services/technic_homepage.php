@@ -104,8 +104,8 @@
             else if(isset($_GET['section']) && $_GET['section'] == "mat_prod"){
                 if( isset($_GET['action']) && $_GET['action'] == "add")
                     require_once("source/include/technic_pages/add_used_materials_and_products.php");
-                if( isset($_GET['action']) && $_GET['action'] == "add")
-                    require_once("source/include/technic_pages/view_material_and_product.php");
+                if( isset($_GET['action']) && $_GET['action'] == "view")
+                    require_once("source/include/technic_pages/view_used_material_and_product.php");
             }
         }    
 
