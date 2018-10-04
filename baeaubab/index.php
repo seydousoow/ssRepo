@@ -46,6 +46,9 @@
     <!-- main responsive css -->
     <link rel="stylesheet" href="services/css/responsive.css">
 
+    <!-- main swal sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- main sidr css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sidr@2.2.1/dist/stylesheets/jquery.sidr.dark.min.css">
 </head>
@@ -56,7 +59,12 @@
     <!-- end of the loader -->
 
     <?php 
-    require_once("services/source/error_page/login_error.php");?>
+    if (isset($_GET['loggedin']) && $_GET['loggedin'] == "false")
+        echo '<script>swal("ERROR","Vous ne pouvez accéder à cette page qu\'après vous être authentifié!","error");</script>';
+    else if (isset($_GET['session']) && $_GET['session'] == "expired")
+        echo '<script>swal("INFO !", "Votre session a expiré, veuillez vous reconnecter SVP!", "info");</script>';
+
+    require_once("services/source/error_page/login_error.php"); ?>
     <div id="login-main-container">
 
         <div id="login-form-container">
@@ -68,7 +76,7 @@
             <form method="post" action="services/source/model/login.php">
 
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" name="username" id="username" placeholder="Entrer votre login..." autofocus required>
+                <input type="text" name="username" id="username" placeholder="Entrer votre login..." autocomplete="off" required>
 
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="passsword" placeholder="Entrer votre mot de passe..." required>
@@ -76,13 +84,12 @@
                 <input type="submit" class="btn btn-primary" name="submit-login-form" value="Se connecter">
             </form>
         </div>
-
         <!-- Return to Top -->
         <a href="javascript:" class="wow fadeInBigDown" data-wow-duration="2s" id="return-to-top"><i class="fas fa-chevron-circle-up"></i></a>
     </div>
 
     <!-- include the footer -->
-    <?php include("services/source/include/footer.php");?>
+    <?php include("services/source/include/footer.php"); ?>
     <!--end of footer -->
 
     <!-- javascript inclusion -->

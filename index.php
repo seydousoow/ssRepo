@@ -56,7 +56,7 @@
     <!-- end of the loader -->
 
     <?php 
-    require_once("services/source/error_page/login_error.php");?>
+    require_once("services/source/error_page/login_error.php"); ?>
     <div id="login-main-container">
 
         <div id="login-form-container">
@@ -82,7 +82,7 @@
     </div>
 
     <!-- include the footer -->
-    <?php include("services/source/include/footer.php");?>
+    <?php include("services/source/include/footer.php"); ?>
     <!--end of footer -->
 
     <!-- javascript inclusion -->
