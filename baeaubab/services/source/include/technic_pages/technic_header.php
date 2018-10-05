@@ -33,18 +33,10 @@
                             les suivis</a>
                     </div>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                        role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                <li class="nav-item">
+                    <a class="nav-link" href="technic_homepage.php?stock" id="navbarDropdownMenuLink">
                         Gestion du stock
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="technic_homepage.php?stock&action=view">Consulter
-                            le stock</a>
-                        <a class="dropdown-item" href="technic_homepage.php?stock&action=update">Mettre
-                            a jour le stock</a>
-                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -105,7 +97,7 @@
                                 enregistrement</a>
                             <a class="dropdown-item" href="technic_homepage.php?maintenance&section=mat_prod&action=view">Listage
                                 des
-                                matériaux <br/>et produits</a>
+                                matériaux <br />et produits</a>
                         </div>
                     </div>
                 </li>
@@ -117,36 +109,39 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="technic_homepage.php?production_monitoring&action=new" id="navbarDropdownMenuLink">
+                    <a class="nav-link" href="technic_homepage.php?production_monitoring&action=new"
+                        id="navbarDropdownMenuLink">
                         Suivi de la production
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="technic_homepage.php?water-treatment&action=new" id="navbarDropdownMenuLink">
+                    <a class="nav-link" href="technic_homepage.php?water-treatment&action=new"
+                        id="navbarDropdownMenuLink">
                         Control du traitement d'eau
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="technic_homepage.php?purification-system&action=new" id="navbarDropdownMenuLink">
+                    <a class="nav-link" href="technic_homepage.php?purification-system&action=new"
+                        id="navbarDropdownMenuLink">
                         Control du système de purification
                     </a>
                 </li>
-                
+
             </ul>
         </div>
-<?php
+        <?php
 
-}
-?>
+    }
+    ?>
     </nav>
 </header>
 
 <script>
     $('ul.navbar-nav li.dropdown').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(
             100);
     }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(
             100);
     });
     $('ul.navbar-nav li.dropright').hover(function () {
@@ -155,10 +150,10 @@
         $(this).find('.dm1').stop(true, true).delay(0).fadeOut(100);
     });
     $('.dm1').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeIn(
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(
             100);
     }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(0).fadeOut(
+        $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(
             100);
     });
 </script>
