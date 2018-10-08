@@ -90,10 +90,7 @@ require("source/model/handle-acces.php");
             else if (isset($_GET['action']) && $_GET['action'] == "view")
                 require_once('source/include/technic_pages/show_production_monitoring.php');
         } else if (isset($_GET['stock'])) {
-            if (isset($_GET['action']) && $_GET['action'] == "view")
-                require_once("source/include/technic_pages/view_stock.php");
-            else if (isset($_GET['action']) && $_GET['action'] == "update")
-                require_once("source/include/technic_pages/update_stock.php");
+            require_once("source/include/technic_pages/manage_stock.php");
         } else if (isset($_GET['water-treatment'])) {
             if (isset($_GET['action']) && $_GET['action'] == "new")
                 require_once('source/include/technic_pages/add_treatment_system_control.php');

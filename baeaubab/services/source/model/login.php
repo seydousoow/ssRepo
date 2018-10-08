@@ -5,6 +5,8 @@ if (session_status() == PHP_SESSION_NONE)
 if (isset($_POST) and count($_POST) >= 3) {
     $user = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $pwd = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $token = filter_var($_POST['token'], FILTER_SANITIZE_URL);
+    $stat = filter_var($_POST['status'], FILTER_SANITIZE_NUMBER_INT);
 
     require("../model/init.php");
     $bd = connect();
@@ -18,7 +20,10 @@ if (isset($_POST) and count($_POST) >= 3) {
             //check if the password is correct
             if (password_verify($pwd, $data['password'])) {
                 setSess($user, $data['status']);
-                redirecting_to_home($data['status']);
+                if (isset($token) && ($stat == $data['status']))
+                    header("location: " . urldecode($token));
+                else
+                    redirecting_to_home($data['status']);
             } else
                 login_error(2);
         }
@@ -31,16 +36,19 @@ function redirecting_to_home($status)
 {
     switch ($status) {
         case 1:
-            header("location: /baeaubab/admin/director_homepage.php");
+            header("location: ../../../admin/director_homepage.php");
             break;
         case 2:
-            header("location: /baeaubab/services/production_homepage.php");
+            header("location: ../../../services/production_homepage.php");
             break;
         case 3:
-            header("location: /baeaubab/services/delivery_homepage.php?new_delivery");
+            header("location: ../../../services/delivery_homepage.php?new_delivery");
             break;
         case 4:
-            header("location: /baeaubab/services/technic_homepage.php?production_monitoring&action=new");
+            header("location: ../../../services/technic_homepage.php?production_monitoring&action=new");
+            break;
+        case 5:
+            header("location: ../../../services/technic_homepage.php?production_monitoring&action=new");
             break;
     }
 }
@@ -58,6 +66,7 @@ function login_error($state)
 //set user details as session variable
 function setSess($usr, $status)
 {
+    $_SESSION['loggedin'] = true;
     $_SESSION['connected'] = true;
     $_SESSION['timer'] = time();
     $_SESSION['username'] = $usr;

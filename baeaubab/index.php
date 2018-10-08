@@ -81,6 +81,16 @@
                 <label for="password">Mot de passe</label>
                 <input type="password" name="password" id="passsword" placeholder="Entrer votre mot de passe..." required>
 
+                <?php
+                if (isset($_GET['token'])) {
+                    $token = $_GET['token'];
+                    echo "<input type='hidden' name='token' value='$token'>";
+                }
+                if (isset($_GET['status'])) {
+                    $status = $_GET['status'];
+                    echo "<input type='hidden' name='status' value='$status'>";
+                }
+                ?>
                 <input type="submit" class="btn btn-primary" name="submit-login-form" value="Se connecter">
             </form>
         </div>
