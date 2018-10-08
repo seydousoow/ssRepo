@@ -43,7 +43,7 @@ if (isset($_POST)) {
         //if there is a problem
         $bd->rollback();
         //redirection
-        echo $e->getMessage();
+        // echo $e->getMessage();
         header("location: ../../../technic_homepage.php?purification-system&action=new&state=error&code=" . $e->getCode());
     }
 }
@@ -62,7 +62,7 @@ function checkRecord($date)
             $hasrecord = false;
         $bd->commit();
     } catch (PDOException $e) {
-        //if there is a problem
+        //cancel changement that has been made in the database if there is a problem
         $bd->rollback();
         //redirection
         //echo $e->getMessage();
