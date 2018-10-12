@@ -168,7 +168,8 @@ footer div:last-child {
     border-color: #375a72;
     text-align: center
 }
-td .tg-0lax:first-child{
+
+td .tg-0lax:first-child {
     text-align: center
 }
 
@@ -188,7 +189,7 @@ td .tg-0lax:first-child{
     width: 7%;
 }
 
-.tg-nn11:nth-child(1){
+.tg-nn11:nth-child(1) {
     width: 150px;
 }
 
@@ -306,7 +307,7 @@ td .tg-0lax:first-child{
     text-align: center;
 }
 
-.tg .tg-0lax{
+.tg .tg-0lax {
     color: black;
     text-align: center
 }
@@ -590,7 +591,7 @@ td .tg-0lax:first-child{
 }
 
 #dateSelector {
-    width: 340px;
+    width: 450px;
     text-align: center;
     background-color: whitesmoke;
     color: #375a72;
