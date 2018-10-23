@@ -6,8 +6,7 @@ if (isset($_POST['currentDate'])) {
 
     //sanitize et set empty variables to zero or empty string
     $currentDate = (strlen($currentDate) > 0) ? filter_var($currentDate, FILTER_SANITIZE_NUMBER_INT) : date("Y-m-d");
-    $conduc05 = (strlen($conduc05) > 0) ? filter_var($conduc05, FILTER_SANITIZE_STRING) : "";
-    $conduc19 = (strlen($conduc19) > 0) ? filter_var($conduc19, FILTER_SANITIZE_STRING) : "";
+    $conductor = filter_var($conductor, FILTER_SANITIZE_NUMBER_INT);
     $start05 = (strlen($start05) > 0) ? substr(filter_var($start05, FILTER_SANITIZE_STRING), 0, -3) : "00:00";
     $start19 = (strlen($start19) > 0) ? substr(filter_var($start19, FILTER_SANITIZE_STRING), 0, -3) : "00:00";
     $end05 = (strlen($end05) > 0) ? substr(filter_var($end05, FILTER_SANITIZE_STRING), 0, -3) : "00:00";
@@ -47,7 +46,7 @@ if (isset($_POST['currentDate'])) {
         
         //production monitoring
         $req = $bd->prepare($sqlProduction);
-        $req->execute(array($currentDate, $conduc05, $conduc19, $start05, $start19, $end05, $end19, $produc05, $produc19, $deliv05, $deliv19, $rebus05, $rebus19, $visa05, $visa19, $resp05, $resp19));
+        $req->execute(array($currentDate, $conductor, $conductor, $start05, $start19, $end05, $end19, $produc05, $produc19, $deliv05, $deliv19, $rebus05, $rebus19, $visa05, $visa19, $resp05, $resp19));
 
         //the stock of the preforms
         $req = $bd->prepare($sqlPreform);
@@ -59,7 +58,7 @@ if (isset($_POST['currentDate'])) {
 
         //if erything is aight, commit the transaction
         $bd->commit();
-        header("location: ../../../technic_homepage.php?production_monitoring&action=new&add=success");
+        header("location: ../../../technic_homepage.php?production_monitoring&action=new&add=success&date=" . $currentDate);
     } catch (Exception $e) {
         //on annule la transation
         $bd->rollback();

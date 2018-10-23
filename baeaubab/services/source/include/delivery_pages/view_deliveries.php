@@ -42,60 +42,59 @@
             <tr>
                 <th class="thead-liv"></th>
                 <?php
-                
-                for($i=1;$i<17;$i++){
-                    if($i==16)
+
+                for ($i = 1; $i < 17; $i++) {
+                    if ($i == 16)
                         echo '<th class="thead-liv">Total</th>';
-                    else if($i == 11)
+                    else if ($i == 11)
                         echo '<th class="thead-liv">Ligne 10 BIS</th>';
-                    else if($i == 12)
+                    else if ($i == 12)
                         echo '<th class="thead-liv">Ligne 11</th>';
-                    else if($i == 13)
+                    else if ($i == 13)
                         echo '<th class="thead-liv">Ligne 12</th>';
-                    else if($i == 14 )
+                    else if ($i == 14)
                         echo '<th class="thead-liv">Ligne Camion</th>';
-                    else if($i == 15)
+                    else if ($i == 15)
                         echo '<th class="thead-liv">Ligne Comptoire</th>';
                     else
-                        echo '<th class="thead-liv"> Ligne '.$i.'</th>';
+                        echo '<th class="thead-liv"> Ligne ' . $i . '</th>';
                 }
                 ?>
             </tr>
         </thead>
         <tbody>
 
-            <?php            
-            $details = ["Bouteilles Charge&#769;es", "Bouteilles Livre&#769;es", "Bouteilles Consigne&#769;es", "Bouteilles De&#769;consigne&#769;es", "Retour Bouteilles Pleines", "Retour Bouteilles Vides", "Retour Bouteilles Pre&#769;te&#769;es", "Bouteilles Pre&#769;te&#769;es", "Bouteilles Perce&#769;es en entrepôt", "Bouteilles Perce&#769;es en voiture", "Bouteilles Perdues", "Client Livre&#769;s sur Demande", "Remarques"];            
-            for($i=0; $i<count($details);$i++){
+            <?php 
+            $details = ["Bouteilles Charge&#769;es", "Bouteilles Livre&#769;es", "Bouteilles Consigne&#769;es", "Bouteilles De&#769;consigne&#769;es", "Retour Bouteilles Pleines", "Retour Bouteilles Vides", "Retour Bouteilles Pre&#769;te&#769;es", "Bouteilles Pre&#769;te&#769;es", "Bouteilles Perce&#769;es en entrepôt", "Bouteilles Perce&#769;es en voiture", "Bouteilles Perdues", "Client Livre&#769;s sur Demande", "Remarques"];
+            for ($i = 0; $i < count($details); $i++) {
                 echo '<tr>';
-                echo '<th scope="col" class="theadY-liv">'.$details[$i].'</td>';
-                for($k=0;$k<16;$k++){
-                    $num_line = $k+1;
-                    $num_row = $i+1;
+                echo '<th scope="col" class="theadY-liv">' . $details[$i] . '</td>';
+                for ($k = 0; $k < 16; $k++) {
+                    $num_line = $k + 1;
+                    $num_row = $i + 1;
                     //insert a cell
-                    if($k==15)
+                    if ($k == 15)
                         echo '<td class="total-cell">';
                     else
                         echo '<td>';
                         //cell container
                         //total cell
-                        if($k == 15){
-                            if($i<=10)
-                                echo '<div class="input-group">
-                                    <input type="text" class="form-control line'.$num_line.' row'.$num_row.'" disabled>
-                                  </div>';
-                        }
-                        else if($i>10)
-                            //text area
+                    if ($k == 15) {
+                        if ($i <= 10)
                             echo '<div class="input-group">
-                                    <textarea class="form-control line'.$num_line.' row'.$num_row.'" disabled></textarea>
+                                    <input type="text" class="form-control line' . $num_line . ' row' . $num_row . '" disabled>
+                                  </div>';
+                    } else if ($i > 10)
+                            //text area
+                    echo '<div class="input-group">
+                                    <textarea class="form-control line' . $num_line . ' row' . $num_row . '" disabled></textarea>
                                   </div>';
 
-                        else
-                            echo '<div class="input-group">
-                                    <input type="text" class="form-control line'.$num_line.' row'.$num_row.'" disabled>
+                    else
+                        echo '<div class="input-group">
+                                    <input type="text" class="form-control line' . $num_line . ' row' . $num_row . '" disabled>
                                   </div>';
-                    
+
                     echo '</td>';
                 }
                 echo '</tr>';
@@ -138,14 +137,15 @@
 
 <?php 
 require_once("source/model/delivery/M_show_data_delivery_page.php");
-if(isset($_GET['date']) && $_GET['date']!= ""){
+if (isset($_GET['date']) && $_GET['date'] != "") {
     $data = get_data_per_line($_GET['date']);
-?>
+    ?>
 <script>
-    var dat = <?php echo json_encode($data);?>;
+    var dat = <?php echo json_encode($data); ?>;
     var data = Object.values(dat);
     getDataForDate(data);
 
 </script>
 
-<?php } ?>
+<?php 
+} ?>

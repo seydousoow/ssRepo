@@ -10,49 +10,45 @@ if (isset($_POST) and count($_POST) >= 3) {
 
     require("../model/init.php");
     $bd = connect();
-    $sql = "select password, status from credentials where username=?";
+    $sql = "select password, credentials.status as status, nom, prenom, userstatus.status as poste from credentials inner join userstatus on credentials.status = userstatus.id where username=?";
     $req = $bd->prepare($sql);
     $req->execute(array($user));
     
     //check if the username exists
     if ($req->rowCount() > 0) {
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
-            //check if the password is correct
+                //check if the password is correct
             if (password_verify($pwd, $data['password'])) {
-                setSess($user, $data['status']);
-                if (isset($token) && ($stat == $data['status']))
-                    header("location: " . urldecode($token));
-                else
-                    redirecting_to_home($data['status']);
+                setSess($user, $data['status'], $data['nom'], $data['prenom'], $data['poste']);
+                ((isset($token)) && ($stat == $data['status'])) ? header("location: " . urldecode($token)) : redirecting_to_home($data['poste']);
             } else
                 login_error(2);
         }
     } else
         login_error(1);
 }
-
-//redirection to the good page according to the status of the user that logged in
+    
+    //redirection to the good page according to the status of the user that logged in
 function redirecting_to_home($status)
 {
     switch ($status) {
-        case 1:
-            header("location: ../../../admin/director_homepage.php");
+        case "Directeur Général":
+            header("location: /admin/director_homepage.php ");
             break;
-        case 2:
+        case "Production":
             header("location: ../../../services/production_homepage.php");
             break;
-        case 3:
+        case "Livraison":
             header("location: ../../../services/delivery_homepage.php?new_delivery");
             break;
-        case 4:
+        case "Technique":
             header("location: ../../../services/technic_homepage.php?production_monitoring&action=new");
             break;
-        case 5:
+        case "Employe Service Technique":
             header("location: ../../../services/technic_homepage.php?production_monitoring&action=new");
             break;
     }
 }
-
 //send indication in the error according to the credentials the user used to log in
 function login_error($state)
 {
@@ -64,11 +60,14 @@ function login_error($state)
 }
 
 //set user details as session variable
-function setSess($usr, $status)
+function setSess($usr, $status, $nom, $prenom, $poste)
 {
     $_SESSION['loggedin'] = true;
     $_SESSION['connected'] = true;
     $_SESSION['timer'] = time();
     $_SESSION['username'] = $usr;
     $_SESSION['status'] = $status;
+    $_SESSION['name'] = $nom;
+    $_SESSION['surname'] = $prenom;
+    $_SESSION['poste'] = $poste;
 }

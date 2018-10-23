@@ -5,70 +5,163 @@
         overflow: hidden;
         justify-content: flex-start;
     }
-</style>
 
-<?php
-//show error
-ini_set('display_errors',1);
-error_reporting(E_ALL);
+    #selectDateContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+    }
 
-if(isset($_GET['operation'])){
-    if($_GET['operation'] == "add"){
-        if($_GET['state'] == "success"){
-            $title = "Enregistré";
-            $message = "L'ajout de la ligne ".$_GET['line']." du ".$_GET['date']." a réussi.";
+    #dateSelector {
+        width: 300px;
+        text-align: center;
+        margin-right: 40px;
+        color: white;
+        font-family: georgia;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    #showBtn {
+        color: white;
+        font-family: georgia;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 0.4px;
+    }
+
+    /**************************************new delivery region ********************************/
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-color: #999;
+        margin: 0px auto;
+    }
+
+    .tg td {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        padding: 5px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #999;
+        color: #444;
+        background-color: #F7FDFA;
+    }
+
+    .tg th {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        padding: 10px 5px;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        word-break: normal;
+        border-color: #999;
+        color: #fff;
+        background-color: #26ADE4;
+    }
+
+    .tg .tg-9g35 {
+        background-color: #D2E4FC;
+        font-size: 13px;
+        font-family: Georgia, serif !important;
+        border-color: inherit;
+        text-align: left
+    }
+
+    .tg .tg-j71d {
+        font-size: 20px;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+        background-color: #f5f5f5;
+        color: #8a2be2;
+        border-color: #000000;
+        text-align: center
+    }
+
+    .tg .tg-iqjh {
+        background-color: #3166ff;
+        font-weight: bold;
+        font-size: 16px;
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+        color: #f7fdfa;
+        border-color: #000000;
+        text-align: center
+    }
+
+    .tg .tg-4mdr {
+        font-size: 13px;
+        font-family: Georgia, serif !important;
+        border-color: inherit;
+        text-align: left
+    }
+
+    @media screen and (max-width: 767px) {
+        .tg {
+            width: auto !important;
         }
-        else if($_GET['state'] == "fail"){
-            $title = "Échec";
-            $message = "L'ajout de la ligne ".$_GET['line']." du ".$_GET['date']." a échoué.";
+
+        .tg col {
+            width: auto !important;
+        }
+
+        .tg-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: auto 0px;
         }
     }
-    else if($_GET['operation'] == "update"){
-        if($_GET['state'] == "success"){
-            $title = "Enregistré";
-            $message = "La mise à jour de la ligne ".$_GET['line']." du ".$_GET['date']." a réussi.";
-        }
-        else if($_GET['state'] == "fail"){
-            $title = "Échec";
-            $message = "La mise à jour de la ligne ".$_GET['line']." du ".$_GET['date']." a échoué.";
-        }
-    } ?>
-<script>
-    var title = "<?php echo $title; ?>",
-            message = "<?php echo $message; ?>";
-        swal(title, message, ((title == "Enregistré") ? "success" : "error")).
-        then((value) => { location.href = "delivery_homepage.php?new_delivery"; });   
-    </script>
+
+</style>
+
+<div id="selectDateContainer" style="margin-bottom: 7px;">
+    <input type="text" name="dateSelector" id="dateSelector">
+    <input type="button" class="btn btn-primary" id="showBtn" value="Afficher">
+</div>
+
+<script src="source/include/delivery_pages/js/add_delivery.js"></script>
 <?php
-}
+require_once('source/model/delivery/M_set_delivery.php');
 ?>
+<script>
+    const frenchDateFormat = new Date(<?php echo json_encode(defaultDate); ?>).frenchDate();
+    const numericDateFormat  = <?php echo json_encode(defaultDate); ?>;
+    document.getElementById("dateSelector").value = "Livraison du " + frenchDateFormat;
+</script>
+
 
 <div id="new-delivery-main-container">
     <p class="delivery-employe-title">
-        Enregistrement d'une nouvelle livraison
+        Enregistrement des lignes de livraison du <script>document.write(frenchDateFormat);</script>
+        de la re&#769;gion de Dakar
     </p>
 
     <div id="new-delivery-container">
         <!-- list of name of each column-->
         <?php
-        $details = ["Livreur", "Aide Livreur", "Chauffeur", "Bouteilles Charge&#769;es", "Bouteilles Livre&#769;es", "Bouteilles Consigne&#769;es", "Bouteilles De&#769;consigne&#769;es", "Retour Bouteilles Pleines", "Retour Bouteilles Vides", "Retour Bouteilles Pre&#769;te&#769;es", "Bouteilles Pre&#769;te&#769;es", "Bouteilles Perce&#769;es en entrepôt", "Bouteilles Perce&#769;es en voiture", "Bouteilles Perdues", "Client Livre&#769;s sur Demande", "Remarques"];            
+        $details = ["Livreur", "Aide Livreur", "Chauffeur", "Bouteilles Charge&#769;es", "Bouteilles Livre&#769;es", "Bouteilles Consigne&#769;es", "Bouteilles De&#769;consigne&#769;es", "Retour Bouteilles Pleines", "Retour Bouteilles Vides", "Retour Bouteilles Prê&#769;te&#769;es", "Bouteilles Prê&#769;te&#769;es", "Bouteilles Perce&#769;es en entrepôt", "Bouteilles Perce&#769;es en voiture", "Bouteilles Perdues", "Client Livre&#769;s sur Demande", "Remarques"];
         ?>
         <!-- fixed table that represent the name of each column -->
-        <table id="new-delivery-first-column" class="table table-striped table-sm table-bordered" style="width:230px">
+        <table id="new-delivery-first-column" class="table table-striped table-sm table-bordered"
+            style="width:235px">
             <thead>
                 <tr>
-                    <th>Date:
-                        <?php date_default_timezone_set("Africa/Dakar"); echo date("d-F-Y");?>
+                    <th>
+                        De&#769;signation
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <?php 
-                for($i=0; $i<count($details);$i++){
-                    if($i>= (count($details)-2))
-                        echo "<tr><td class='theadY-liv' style=\"height: 83.6px;\">$details[$i]</td></tr>";
+                for ($i = 0; $i < count($details); $i++) {
+                    if ($i >= (count($details) - 2))
+                        echo "<tr><td class='theadY-liv' style=\"height: 67.6px !important;\">$details[$i]</td></tr>";
                     else
-                        echo "<tr><td class='theadY-liv' style=\"height: 48.6px;\">$details[$i]</td></tr>";
+                        echo "<tr><td class='theadY-liv'>$details[$i]</td></tr>";
                 }
                 ?>
             </tbody>
@@ -79,63 +172,63 @@ if(isset($_GET['operation'])){
                 <thead>
                     <tr>
                         <?php
-                        for($i=1;$i<17;$i++){
-                            if($i==16)
+                        for ($i = 1; $i < 17; $i++) {
+                            if ($i == 16)
                                 echo '<th class="thead-liv">Total</th>';
-                            else if($i == 11)
+                            else if ($i == 11)
                                 echo '<th class="thead-liv">Ligne 10 BIS</th>';
-                            else if($i == 12)
+                            else if ($i == 12)
                                 echo '<th class="thead-liv">Ligne 11</th>';
-                            else if($i == 13)
+                            else if ($i == 13)
                                 echo '<th class="thead-liv">Ligne 12</th>';
-                            else if($i == 14 )
+                            else if ($i == 14)
                                 echo '<th class="thead-liv">Ligne Camion</th>';
-                            else if($i == 15)
+                            else if ($i == 15)
                                 echo '<th class="thead-liv">Ligne Comptoir</th>';
                             else
-                                echo '<th class="thead-liv"> Ligne '.$i.'</th>';
+                                echo '<th class="thead-liv"> Ligne ' . $i . '</th>';
                         }
                         ?>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <?php            
-                    for($i=0; $i<count($details);$i++){
+                    <?php 
+                    for ($i = 0; $i < count($details); $i++) {
                         //create new row
                         echo '<tr>';
                         //iterate all the line including the total line
-                        for($k=0;$k<16;$k++){
+                        for ($k = 0; $k < 16; $k++) {
                             //creating index fr the numer of each row and each line
-                            $num_line = $k+1;
-                            $num_row = $i+1;
+                            $num_line = $k + 1;
+                            $num_row = $i + 1;
                             //new cell
                             echo '<td>';
                             //if we are pointing to the total column
-                            if($k==15){
+                            if ($k == 15) {
                                 //create total cell for the according row and ignoring non-calculable cell of the current row
-                                if($i>2 && $i<=13)
+                                if ($i > 2 && $i <= 13)
                                     echo '<div class="input-group">
-                                        <input type="text" class="form-control line'.$num_line.' row'.$num_row.'" value="" disabled>
+                                        <input type="text" class="form-control line' . $num_line . ' row' . $num_row . '" value="" disabled>
                                       </div>';
                             }
                             //if we are pointing to the three first rows of each line. those are the rows for the selection of each line's employes
-                            else if($i<3)
+                            else if ($i < 3)
                                 echo '<div class="input-group">
-                                        <input type="text" class="form-control line'.$num_line.' row'.$num_row.'" value="" readonly disabled>
+                                        <input type="text" class="form-control line' . $num_line . ' row' . $num_row . '" value="" readonly disabled>
                                         <div class="input-group-prepend">
-                                          <div class="input-group-text" id="btnGroupAddon" ><i class="fas fa-pen sel_line'.$num_line.'" style="pointer-events:none" onclick="selectEmploye('.$num_line.', '.$num_row.');"></i></div>
+                                          <div class="input-group-text" id="btnGroupAddon" ><i class="fas fa-pen sel_line' . $num_line . '" style="pointer-events:none" onclick="selectEmploye(' . $num_line . ', ' . $num_row . ');"></i></div>
                                         </div>
                                       </div>';
                             //if we are pointing to the last two rows of each line. those are the rows for remarques and some slected clients if exist
-                            else if($i>13)
+                            else if ($i > 13)
                                 echo '<div class="input-group">
-                                        <textarea type="text" class=" form-control line'.$num_line.' row'.$num_row.'" value="" disabled></textarea>
+                                        <textarea type="text" class=" form-control line' . $num_line . ' row' . $num_row . '" value="" disabled></textarea>
                                       </div>';
                             //else just create normal row with empty input that will take the numbers of bottles
                             else
                                 echo '<div class="input-group">
-                                        <input type="text" class="form-control line'.$num_line.' row'.$num_row.'" value="" disabled>
+                                        <input type="text" class="form-control line' . $num_line . ' row' . $num_row . '" value="" disabled>
                                       </div>';
 
                             echo '</td>';
@@ -147,15 +240,15 @@ if(isset($_GET['operation'])){
                     <tr>
                         <?php
                         //row for the buttons (edit save or cancel the line)
-                            for($i=0;$i<15;$i++){
-                                $index = $i +1;
-                                echo '<td class="row-btn">
+                        for ($i = 0; $i < 15; $i++) {
+                            $index = $i + 1;
+                            echo '<td class="row-btn">
                                     <div>
-                                        <button type="button" id="editer'.$index.'" onclick="edit('.$index.')" class="btn btn-primary">Éditer</button>
-                                        <button style="display:none" type="button" id="annuler'.$index.'" onclick="annuler('.$index.')" class="btn btn-danger">Annuler</button>
+                                        <button type="button" id="editer' . $index . '" onclick="edit(' . $index . ')" class="btn btn-primary">Éditer</button>
+                                        <button style="display:none" type="button" id="annuler' . $index . '" onclick="annuler(' . $index . ')" class="btn btn-danger">Annuler</button>
                                     </div>
                                 </td>';
-                            }
+                        }
                         ?>
                     </tr>
                 </tbody>
@@ -164,7 +257,12 @@ if(isset($_GET['operation'])){
     </div>
 </div>
 
+<?php
+require_once("new_delivery_region.php");
+?>
+
 <form id="new-delivery-form" method="post" action="source/model/delivery/M_add_delivery.php">
+    <input type="hidden" name="date" id="date" value="<?php echo defaultDate; ?>">
     <input type="hidden" name="livreur" id="form-row1" value="">
     <input type="hidden" name="aideLivreur" id="form-row2" value="">
     <input type="hidden" name="chauffeur" id="form-row3" value="">
@@ -194,13 +292,14 @@ if(isset($_GET['operation'])){
         </div>
         <div class="modal-body">
             <div class="input-group">
-                <select class="form-control" name="modal-employe" id="modal-employe" required>
+                <select class="form-control" name="modal-employe" id="modal-employe"
+                    required>
                     <option value="">Se&#769;lectionner</option>;
                     <?php
                     require_once("source/model/delivery/M_list_employe.php");
-                    $list=get_list();
-                    for($i=0;$i<count($list);$i++){
-                        echo '<option value="'.$list[$i][4].'">'.$list[$i][2].' '.$list[$i][1].'</option>';
+                    $list = get_list();
+                    for ($i = 0; $i < count($list); $i++) {
+                        echo '<option value="' . $list[$i][4] . '">' . $list[$i][2] . ' ' . $list[$i][1] . '</option>';
                     }
                     ?>
                 </select>
@@ -217,226 +316,44 @@ if(isset($_GET['operation'])){
     </div>
 </div>
 
-
-<script>
-    var listPreselected = [
-        ["2018-liv-0016", "2018-liv-0030", "2018-liv-0029"],
-        ["2018-liv-0008", "2018-liv-0025", "2018-liv-0014"],
-        ["2018-liv-0018", "2018-liv-0028", "2018-liv-0022"],
-        ["2018-liv-0007", "2018-liv-0035", "2018-liv-0004"],
-        ["2018-liv-0009", "2018-liv-0032", "2018-liv-0021"],
-        ["2018-liv-0012", "2018-liv-0038", "2018-liv-0017"],
-        ["2018-liv-0010", "2018-liv-0033", "2018-liv-0011"],
-        ["2018-liv-0002", "2018-liv-0037", "2018-liv-0024"],
-        ["2018-liv-0006", "2018-liv-0036", "2018-liv-0020"],
-        ["2018-liv-0039", "2018-liv-00", "2018-liv-0003"],
-        ["2018-liv-0040", "2018-liv-00", "2018-liv-0041"],
-        ["2018-liv-0015", "2018-liv-00", "2018-liv-0027"],
-        ["2018-liv-0013", "2018-liv-0034", "2018-liv-0031"],
-        ["2018-liv-0026", "2018-liv-00", "2018-liv-0019"],
-        ["2018-liv-0042", "2018-liv-00", "2018-liv-00"]
-    ];
-    //set the value for ery line the driver the deliver and the helper
-    $(document).ready(function() {
-        for (var i = 0; i < 15; i++) {
-            for (var j = 0; j < 3; j++) {
-                //console.log(listPreselected[i][j]);
-                var line = i + 1,
-                    row = j + 1;
-                selectEmploye(line, row);
-                var x = document.getElementById("modal-employe");
-                for (var k = 0; k < x.length; k++) {
-                    if (x.options[k].value == listPreselected[i][j]) {
-                        x.selectedIndex = k;
-                        $("#validate-modal").click();
-                        document.getElementById('myModal').style.display = "none";
-                    }
-                }
-            }
-        }
-        document.getElementById('myModal').style.display = "none";
-        for (i = 1; i < 4; i++) {
-            document.getElementById("form-row" + i).value = "";
-        }
-    });
-
-    function selectEmploye(line, row) {
-        var text = "",
-            title = document.getElementById("modal-title");
-        if (row == 1)
-            text = "Selection du livreur";
-        else if (row == 2)
-            text = "Selection de l'aide livreur";
-        else if (row == 3)
-            text = "Selection du Chauffeur";
-
-        title.textContent = text;
-
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // Open the modal
-        modal.style.display = "block";
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        var validate = document.getElementById("validate-modal"),
-            cancel = document.getElementById("cancel-modal");
-
-        validate.onclick = function() {
-            var choice = document.getElementById("modal-employe"),
-                index = choice.selectedIndex;
-            var selected_line = document.getElementsByClassName("line" + line + " row" + row)[0];
-            selected_line.value = choice.options[index].text;
-            document.getElementById("form-row" + row).value = choice.options[index].value;
-            modal.style.display = "none";
-
-            var form_row = document.getElementById("form-row" + row);
-            form_row.value = choice.value;
-            choice.selectedIndex = 0;
-        }
-
-        cancel.onclick = function() {
-            modal.style.display = "none";
-        }
-    }
-
-    function edit(index) {
-        var test = false;
-        var line = null;
-
-        for (var i = 1; i < 16; i++) {
-            if (document.getElementById("save" + i)) {
-                test = true;
-                line = i;
-            }
-        }
-
-        if (test == false) {
-            var line = document.getElementsByClassName("line" + index),
-                i = 0;
-            for (i = 0; i < line.length; i++) {
-                line[i].disabled = false;
-            }
-            var btn = document.getElementById("editer" + index),
-                btn_cancel = document.getElementById("annuler" + index);
-            btn_cancel.style.display = "block";
-            btn.innerHTML = "Enregistrer";
-            btn.removeAttribute("id");
-            btn.setAttribute("id", "save" + index);
-            btn.removeAttribute("onclick");
-            btn.setAttribute("onclick", "save(" + index + ")");
-
-            var choice = document.getElementsByClassName("fa-pen sel_line" + index);
-            for (var k = 0; k < choice.length; k++) {
-                choice[k].style.pointerEvents = "auto";
-                choice[k].style.cursor = "pointer";
-            }
-
-        } else if (test == true) {
-            alert("la modification de la ligne " + line + " n'est pas encore terminee");
-        }
-    }
-
-    function save(index) {
-
-        var row = document.getElementsByClassName("line" + index),
-            i = 3;
-        for (i = 0; i < 3; i++) {
-            t = i + 1;
-            if (document.getElementById("modal-employe").value.length <= 0) {
-                if (row[i].value.length > 0) {
-                    var actualRow = document.querySelector(".line" + index + ".row" + t).value.split(" "),
-                        list_employe = <?php echo json_encode($list); ?>;
-
-                    for (var p = 0; p < list_employe.length; p++) {
-                        if ((list_employe[p][1] == actualRow[1]) && (list_employe[p][2] == actualRow[0]))
-                            document.getElementById("form-row" + t).value = list_employe[p][4];
-                    }
-                }
-            }
-        }
-
-        for (i = 1; i < 4; i++) {
-            t = i - 1;
-            var form_equiv = document.getElementById("form-row" + i);
-            form_equiv.value = (listPreselected[index - 1][t] != "2018-liv-00") ? listPreselected[index - 1][t] : "";
-        }
-
-        for (i = 3; i < row.length; i++) {
-            var t = i + 1;
-            var form_equiv = document.getElementById("form-row" + t);
-            form_equiv.value = row[i].value;
-        }
-
-        document.getElementById("form-line").value = index;
-        document.getElementById("new-delivery-form").submit();
-    }
-
-    function annuler(index) {
-        swal({
-            title: "Annuler",
-            text: "Vous êtes sur le point d'annuler vos modification souhaitez-vous continuer ?",
-            type: "warning",
-            buttons: ["Annuler", "Continuer"],
-            dangerMode: false
-        }).then((value) => {
-            if (value)
-                location.href = "delivery_homepage.php?new_delivery";
-        });
-    }
-
-</script>
 <?php
+//default employes's line setted by delivery responsable
+$preselectedEmploye = [
+    ["2018-liv-0016", "2018-liv-0030", "2018-liv-0029"],
+    ["2018-liv-0008", "2018-liv-0025", "2018-liv-0014"],
+    ["2018-liv-0018", "2018-liv-0028", "2018-liv-0022"],
+    ["2018-liv-0007", "2018-liv-0035", "2018-liv-0004"],
+    ["2018-liv-0009", "2018-liv-0032", "2018-liv-0021"],
+    ["2018-liv-0012", "2018-liv-0038", "2018-liv-0017"],
+    ["2018-liv-0010", "2018-liv-0033", "2018-liv-0011"],
+    ["2018-liv-0002", "2018-liv-0037", "2018-liv-0024"],
+    ["2018-liv-0006", "2018-liv-0036", "2018-liv-0020"],
+    ["2018-liv-0039", "2018-liv-0043", "2018-liv-0003"],
+    ["2018-liv-0040", "2018-liv-0043", "2018-liv-0041"],
+    ["2018-liv-0015", "2018-liv-0043", "2018-liv-0027"],
+    ["2018-liv-0013", "2018-liv-0034", "2018-liv-0031"],
+    ["2018-liv-0026", "2018-liv-0043", "2018-liv-0019"],
+    ["2018-liv-0042", "2018-liv-0043", "2018-liv-0043"]
+];
+
 //get data for the fourtheen lines
-require_once("source/model/delivery/M_show_data_delivery_page.php");
-for($i=1;$i<16; $i++){
-    $data_line["line".$i] = get_data_today($i);
+for ($i = 1; $i < 16; $i++) {
+    //get the data
+    $data_line['line' . $i] = selectedDateData($i, defaultDate);
+    //check if there is a record
+    if (count($data_line['line' . $i]) > 0) {
+        $j = $i - 1;
+        $preselectedEmploye[$j][0] = strlen($data_line['line' . $i][0]) > 0 ? $data_line['line' . $i][0] : "2018-liv-0043";
+        $preselectedEmploye[$j][1] = strlen($data_line['line' . $i][1]) > 0 ? $data_line['line' . $i][1] : "2018-liv-0043";
+        $preselectedEmploye[$j][2] = strlen($data_line['line' . $i][2]) > 0 ? $data_line['line' . $i][2] : "2018-liv-0043";
+    }
 }
 ?>
 
 <script>
     var data = <?php echo json_encode($data_line); ?>;
-    var list_employe = <?php echo json_encode($list);?>;
-    for (var i = 1; i < 16; i++) {
-        if (data['line' + i].length > 0) {
-            for (var j = 0; j < 16; j++) {
-                t = j + 1;
-                var line = document.querySelector(".line" + i + ".row" + t);
-                for (x = 0; x < list_employe.length; x++) {
-                    if (list_employe[x][4] === data['line' + i][j]) {
-                        line.value = list_employe[x][2] + " " + list_employe[x][1];
-                        break;
-                    } else
-                        line.value = data['line' + i][j];
-                }
-            }
-        }
-    }
-
-    //calculate the total
-    for (var i = 4; i < 15; i++) {
-        var row = document.getElementsByClassName("row" + i),
-            total = 0;
-        for (var j = 0; j < row.length; j++) {
-            if (row[j].value.length > 0)
-                total = total + parseInt(row[j].value);
-        }
-        //column that contain the total of each row
-        row[row.length - 1].value = total;
-    }
-
+    var list_employe = <?php echo json_encode($preselectedEmploye); ?>;
+    var listPreselected = <?php echo json_encode($preselectedEmploye); ?>;
 </script>
+
+<script src="source/include/delivery_pages/js/add_delivery_functions.js"></script>

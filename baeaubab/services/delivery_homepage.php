@@ -1,3 +1,8 @@
+<?php 
+if (session_status() == PHP_SESSION_NONE)
+    session_start();
+require("source/model/handle-acces.php");
+?>
 <!doctype HTML>
 <html lang="fr">
 
@@ -32,13 +37,21 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 
     <!--font-awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
 
     <!--main jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script> -->
+    <script src="js/jquery-3.3.1.js"></script>
 
     <!-- bootstrap css-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.4.1.3.css">
 
     <!-- main animation css -->
     <link rel="stylesheet" href="css/animate.css">
@@ -52,12 +65,11 @@
     <!-- main swal sweet alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <?php
-    if(isset($_GET['view_deliveries'])){
-        echo '<link rel="stylesheet" href="css/flatPickR.css">';
-        echo '<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">';
-    }
-    ?>
+    <!--flatpickr date picker -->
+    <script src="js/flatPickR.js"></script>
+    <link rel="stylesheet" href="css/flatPickR.css">
+
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
 
 </head>
 
@@ -76,58 +88,54 @@
 
     <div style="margin-bottom: 40px;">
         <?php
-        if(isset($_GET['list_employe'])){
+        if (isset($_GET['list_employe'])) {
             require_once('source/include/delivery_pages/list_employe.php');
-        }
-        else if(isset($_GET['new_employe'])){
+        } else if (isset($_GET['new_employe'])) {
             require_once('source/include/delivery_pages/new_employe.php');
-        }
-        else if(isset($_GET['edit_employe'])){
+        } else if (isset($_GET['edit_employe'])) {
             require_once('source/include/delivery_pages/edit_employe.php');
-        }
-        else if(isset($_GET['delete_employe'])){
+        } else if (isset($_GET['delete_employe'])) {
             require_once('source/include/delivery_pages/delete_employe.php');
-        }
-        else if(isset($_GET['new_delivery'])){
+        } else if (isset($_GET['new_delivery'])) {
             require_once('source/include/delivery_pages/new_delivery.php');
-        }
-        else if(isset($_GET['view_deliveries'])){
+        } else if (isset($_GET['view_deliveries'])) {
             require_once('source/include/delivery_pages/view_deliveries.php');
-        }
-        else if(isset($_GET['add_absence'])){
+        } else if (isset($_GET['add_absence'])) {
             require_once('source/include/delivery_pages/add_absence.php');
-        }
-        else if(isset($_GET['view_weekly_absence'])){
+        } else if (isset($_GET['view_weekly_absence'])) {
             require_once('source/include/delivery_pages/view_weekly_absence.php');
-        }
-        else if(isset($_GET['add_overtime'])){
+        } else if (isset($_GET['add_overtime'])) {
             require_once('source/include/delivery_pages/add_overtime.php');
-        }
-        else if(isset($_GET['view_overtime_weekly'])){
+        } else if (isset($_GET['view_overtime_weekly'])) {
             require_once('source/include/delivery_pages/view_overtime_weekly.php');
-        }
-        else if(isset($_GET['view_overtime_monthly'])){
+        } else if (isset($_GET['view_overtime_monthly'])) {
             require_once('source/include/delivery_pages/view_overtime_monthly.php');
         }
-        
+
         ?>
         <!-- Return to Top -->
-        <a href="javascript:" class="wow fadeInBigDown" data-wow-duration="2s" id="return-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="javascript:" class="wow fadeInBigDown" data-wow-duration="2s"
+            id="return-to-top"><i class="fas fa-chevron-circle-up"></i></a>
     </div>
 
     <!-- include the footer -->
-    <?php include("source/include/footer.php");?>
+    <?php include("source/include/footer.php"); ?>
     <!--end of footer -->
 
     <!-- javascript inclusion -->
     <!--main jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
 
     <!-- main popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
 
     <!-- main bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
     <!-- main sidr -->
     <script src="https://cdn.jsdelivr.net/npm/sidr@2.2.1/dist/jquery.sidr.min.js"></script>

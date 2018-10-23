@@ -101,6 +101,11 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="technic_homepage.php?disconnect" id="navbarDropdownMenuLink">
+                        Deconnection
+                    </a>
+                </li>
             </ul>
         </div>
         <?php
@@ -126,7 +131,11 @@
                         Control du système de purification
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="technic_homepage.php?disconnect" id="navbarDropdownMenuLink">
+                        Deconnection
+                    </a>
+                </li>
             </ul>
         </div>
         <?php

@@ -1,0 +1,4 @@
+stock
+bouteille perdue
+bouteille percee
+stock difference bouteille chargee - livree

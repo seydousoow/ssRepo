@@ -13,7 +13,7 @@ Date.prototype.yyyymmdd = function () {
 
 //date to french
 Date.prototype.frenchDate = function () {
-    var mm = this.getMonth() + 1; // getMonth() is zero-based
+    var mm = this.getMonth() + 1; // getMonth() is zero-based 
     var dd = this.getDate();
     var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     return [(dd > 9 ? '' : '0') + dd,
@@ -80,21 +80,46 @@ $(document).ready(function () {
     stock.oldBottle05 = document.getElementById("prevStockBottle05").value;
     stock.oldBottle19 = document.getElementById("prevStockBottle19").value;
 
+
     //update to do when the production change
     document.querySelectorAll("#produc05, #produc19").forEach(function (element) {
-        element.addEventListener("keyup", function () {
-            if (checkIfItsInteger(element)) {
+        //update to do when the production's field get focus and data entered
+        element.addEventListener("keyup", function (event) {
+            if (checkIfItsInteger(element) && element.textLength > 0) {
                 if (element.id == "produc05") {
-                    document.getElementById("totalBottle05").value = (element.value.length > 0) ? parseInt(stock.oldBottle05) + parseInt(document.getElementById("produc05").value) : stock.oldBottle05;
+                    //update the total of available bottle
+                    document.getElementById("totalBottle05").value = parseInt(stock.oldBottle05) + parseInt(document.getElementById("produc05").value);
 
-                    document.getElementById("newPreformStock05").value = (element.value.length > 0) ? (document.getElementById("rebus05").value.length > 0 ? parseInt(stock.oldPreform05) - parseInt(element.value) - parseInt(document.getElementById("rebus05").value) : parseInt(stock.oldPreform05) - parseInt(element.value)) : stock.oldPreform05;
+                    document.getElementById("newPreformStock05").value = document.getElementById("rebus05").value.length > 0 ? parseInt(stock.oldPreform05) - parseInt(element.value) - parseInt(document.getElementById("rebus05").value) : parseInt(stock.oldPreform05) - parseInt(element.value);
 
                     document.getElementById("newBottleStock05").value = (document.getElementById("deliv05").value.length > 0) ? parseInt(document.getElementById("totalBottle05").value) - parseInt(document.getElementById("deliv05").value) : document.getElementById("totalBottle05").value;
 
                 } else {
-                    document.getElementById("totalBottle19").value = (element.value.length > 0) ? parseInt(stock.oldBottle19) + parseInt(document.getElementById("produc19").value) : stock.oldBottle19;
+                    document.getElementById("totalBottle19").value = parseInt(stock.oldBottle19) + parseInt(document.getElementById("produc19").value);
 
-                    document.getElementById("newPreformStock19").value = (element.value.length > 0) ? (document.getElementById("rebus19").value.length > 0 ? parseInt(stock.oldPreform19) - parseInt(element.value) - parseInt(document.getElementById("rebus19").value) : parseInt(stock.oldPreform19) - parseInt(element.value)) : stock.oldPreform19;
+                    document.getElementById("newPreformStock19").value = document.getElementById("rebus19").value.length > 0 ? parseInt(stock.oldPreform19) - parseInt(element.value) - parseInt(document.getElementById("rebus19").value) : parseInt(stock.oldPreform19) - parseInt(element.value);
+
+                    document.getElementById("newBottleStock19").value = (document.getElementById("deliv19").value.length > 0) ? parseInt(document.getElementById("totalBottle19").value) - parseInt(document.getElementById("deliv19").value) : document.getElementById("totalBottle19").value;
+                }
+            }
+        });
+        //update to do when the production's field loose focus
+        element.addEventListener("blur", function (event) {
+            if (element.value.length < 1) {
+                //set the value ot zero
+                element.value = 0;
+                if (element.id == "produc05") {
+                    //set the value of the other field
+                    document.getElementById("totalBottle05").value = stock.oldBottle05;
+
+                    document.getElementById("newPreformStock05").value = document.getElementById("rebus05").value.length > 0 ? parseInt(stock.oldPreform05) - parseInt(document.getElementById("rebus05").value) : parseInt(stock.oldPreform05);
+
+                    document.getElementById("newBottleStock05").value = (document.getElementById("deliv05").value.length > 0) ? parseInt(document.getElementById("totalBottle05").value) - parseInt(document.getElementById("deliv05").value) : document.getElementById("totalBottle05").value;
+                } else if (element.id == "produc19") {
+                    //set the value of the other field
+                    document.getElementById("totalBottle19").value = stock.oldBottle19;
+
+                    document.getElementById("newPreformStock19").value = document.getElementById("rebus19").value.length > 0 ? parseInt(stock.oldPreform19) - parseInt(document.getElementById("rebus19").value) : parseInt(stock.oldPreform19);
 
                     document.getElementById("newBottleStock19").value = (document.getElementById("deliv19").value.length > 0) ? parseInt(document.getElementById("totalBottle19").value) - parseInt(document.getElementById("deliv19").value) : document.getElementById("totalBottle19").value;
                 }
@@ -104,30 +129,44 @@ $(document).ready(function () {
 
     //update to do when the delivery change
     document.querySelectorAll("#deliv05, #deliv19").forEach(function (element) {
+        var BottleType = element.id.substr(element.id.length - 2);
         element.addEventListener("keyup", function () {
-            if (checkIfItsInteger(element)) {
-                if (element.id == "deliv05") {
-                    document.getElementById("newBottleStock05").value = (element.value.length > 0) ? parseInt(document.getElementById("totalBottle05").value) - parseInt(element.value) : document.getElementById("totalBottle05");
-                } else {
-                    document.getElementById("newBottleStock19").value = (element.value.length > 0) ? parseInt(document.getElementById("totalBottle19").value) - parseInt(element.value) : document.getElementById("totalBottle19");
-                }
+            if (checkIfItsInteger(element) && element.value.length > 0) {
+                //get the bottle type (0,5 or 19)
+                document.getElementById("newBottleStock" + BottleType).value = parseInt(document.getElementById("totalBottle" + BottleType).value) - parseInt(element.value);
+            }
+        });
+
+        element.addEventListener("blur", function (event) {
+            if (element.value.length < 1) {
+                //set the value ot zero
+                element.value = 0;
+                //get the bottle type (0,5 or 19)
+                document.getElementById("newBottleStock" + BottleType).value = parseInt(document.getElementById("totalBottle" + BottleType).value);
             }
         });
     });
 
     //update to do when the rebus change
     document.querySelectorAll("#rebus05, #rebus19").forEach(function (element) {
+        var BottleType = element.id.substr(element.id.length - 2);
         element.addEventListener("keyup", function () {
-            if (checkIfItsInteger(element)) {
+            if (checkIfItsInteger(element) && element.value.length > 0) {
                 if (element.id == "rebus05") {
-                    document.getElementById("newPreformStock05").value = (element.value.length > 0) ? ((document.getElementById("produc05").value.length > 0) ? parseInt(stock.oldPreform05) - parseInt(element.value) - parseInt(document.getElementById("produc05").value) : parseInt(stock.oldPreform05) - parseInt(element.value)) : stock.oldPreform05;
+                    document.getElementById("newPreformStock05").value = (document.getElementById("produc05").value.length > 0) ? parseInt(stock.oldPreform05) - parseInt(element.value) - parseInt(document.getElementById("produc05").value) : parseInt(stock.oldPreform05) - parseInt(element.value);
                 } else {
-                    document.getElementById("newPreformStock19").value = (element.value.length > 0) ? ((document.getElementById("produc19").value.length > 0) ? parseInt(stock.oldPreform19) - parseInt(element.value) - parseInt(document.getElementById("produc19").value) : parseInt(stock.oldPreform19) - parseInt(element.value)) : stock.oldPreform19;
+                    document.getElementById("newPreformStock19").value = (document.getElementById("produc19").value.length > 0) ? parseInt(stock.oldPreform19) - parseInt(element.value) - parseInt(document.getElementById("produc19").value) : parseInt(stock.oldPreform19) - parseInt(element.value);
                 }
             }
         });
+        element.addEventListener("blur", function (event) {
+            if (element.value.length < 1) {
+                //set the value ot zero
+                element.value = 0;
+                document.getElementById("newPreformStock" + BottleType).value = document.getElementById("produc" + BottleType).value.length > 0 ? parseInt(document.getElementById("prevStockPreform" + BottleType).value) - parseInt(document.getElementById("produc" + BottleType).value) : document.getElementById("prevStockPreform" + BottleType).value;
+            }
+        });
     });
-
 });
 
 //verify if the current character is an integer
@@ -221,6 +260,10 @@ function formValidation() {
         }
     }
 
+    document.querySelectorAll("#newPreformStock05, #newPreformStock19, #newBottleStock05, #newBottleStock19").forEach(function (element) {
+        element.disabled = "";
+    });
+
     if (unfilled05 != 0 && unfilled19 != 0)
         swal({
             title: "Attention",
@@ -230,19 +273,29 @@ function formValidation() {
             dangerMode: false,
         })
         .then((willAdd) => {
-            if (willAdd)
+            if (willAdd) {
+                setLastTwoFields();
                 document.querySelector(".tg-wrap form").submit();
+            } else {
+                document.querySelectorAll("#newPreformStock05, #newPreformStock19, #newBottleStock05, #newBottleStock19").forEach(function (element) {
+                    element.disabled = true;
+                });
+            }
         });
-    else
+    else {
+        setLastTwoFields();
         document.querySelector(".tg-wrap form").submit();
+    }
 }
 
-
-//print table
-function printData() {
-    var divToPrint = document.querySelector(".tg-wrap form");
-    newWin = window.open("");
-    newWin.document.write(divToPrint.outerHTML);
-    newWin.print();
-    newWin.close();
+//set responsable and visa field
+function setLastTwoFields() {
+    document.querySelectorAll("#visa05, #visa19, #resp05, #resp19").forEach(function (element) {
+        var index = element.id.substring(element.id.length - 2),
+            productionValue = parseInt(document.getElementById("produc" + index).value),
+            deliveryValue = parseInt(document.getElementById("deliv" + index).value);
+        if (((!(isNaN(productionValue))) || (!(isNaN(deliveryValue)))) && element.value.length < 1) {
+            element.value = element.placeholder;
+        }
+    });
 }

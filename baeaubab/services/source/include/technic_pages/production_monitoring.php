@@ -1,16 +1,16 @@
 <?php 
-//set the date
+// set the date
 date_default_timezone_set("Africa/Dakar");
 $date = (isset($_GET['date']) ? filter_var($_GET['date'], FILTER_SANITIZE_NUMBER_INT) : date('Y-m-d'));
 
-//add the page for alert
+// add the page for alert
 require_once("source/alert/production_monitoring_alert.php");
 require_once("source/model/init.php");
 
 $bd = connect();
-$currentBottleStock = $currentPreformStock = [];
+$currentBottleStock = $currentPreformStock = $currentData = $userDetails = [];
 
-//get the stock of preform
+// get the stock of preform
 $sql = "select stock05, stock19 from production_preform_stock order by date desc limit 1";
 $req = $bd->prepare($sql);
 $req->execute(array());
@@ -34,21 +34,34 @@ else $hasRecord = false;
 while ($data = $req->fetch(PDO::FETCH_ASSOC))
     $currentData = [$data['conducteur05'], $data['conducteur19'], $data['starting_time05'], $data['starting_time19'], $data['ending_time05'], $data['ending_time19'], $data['production05'], $data['production19'], $data['delivery05'], $data['delivery19'], $data['rebus05'], $data['rebus19'], $data['visa05'], $data['visa19'], $data['responsable05'], $data['responsable19']];
 
-?>
+//if there is a record, get the details of the user that made the record
+if ($hasRecord && ($currentData[0] != $_SESSION['status'])) {
+    $sql = "select nom, prenom from userstatus where id = ?";
+    $req = $bd->prepare($sql);
+    $req->execute(array($currentData[0]));
+    if ($req->rowCount() > 0) {
+        while ($data = $req->fetch(PDO::FETCH_ASSOC))
+            $userDetails = ['name' => $data['nom'], 'surname' => $data['prenom']];
+    } else
+        $userDetails = ['name' => $_SESSION['name'], 'surname' => $_SESSION['surname']];
+} else
+    $userDetails = ['name' => $_SESSION['name'], 'surname' => $_SESSION['surname']];
 
+
+?>
 <div id="selectDateContainer" style="margin-bottom: 7px;">
-    <p>Modifier la date</p>
     <input type="text" name="dateSelector" id="dateSelector">
     <input type="button" class="btn btn-primary" id="showBtn" value="Afficher">
 </div>
 
 <script src="source/include/technic_pages/js/add_production_monitoring.js"></script>
 <script>
-    const CurrentStockPreform05 = <?php echo json_encode($currentPreformStock[0]) ?>;
-    const CurrentStockPreform19 = <?php echo json_encode($currentPreformStock[1]) ?>;
-    const CurrentStockBottle05 = <?php echo json_encode($currentBottleStock[0]) ?>;
-    const CurrentStockBottle19 = <?php echo json_encode($currentBottleStock[1]) ?>;
+    const CurrentStockPreform05 = <?php echo json_encode(count($currentPreformStock) > 0 ? $currentPreformStock[0] : 0) ?>;
+    const CurrentStockPreform19 = <?php echo json_encode(count($currentPreformStock) > 0 ? $currentPreformStock[1] : 0) ?>;
+    const CurrentStockBottle05 = <?php echo json_encode(count($currentBottleStock) > 0 ? $currentBottleStock[0] : 0) ?>;
+    const CurrentStockBottle19 = <?php echo json_encode(count($currentBottleStock) > 0 ? $currentBottleStock[1] : 0) ?>;
     const HasRecord = <?php echo json_encode($hasRecord); ?>;
+    const dateSelected = <?php echo json_encode($date); ?>;
     $(document).ready(function(){
         document.getElementById("dateSelector").value = "Production du " + new Date(<?php echo json_encode($date); ?>).frenchDate();
     });
@@ -79,47 +92,48 @@ while ($data = $req->fetch(PDO::FETCH_ASSOC))
             <tr>
                 <td class="tg-dc05">Stock de Pre&#769;forme:</td>
                 <td class="tg-fm9z" style="background-color:darkgray !important">
-                    <input style="background-color:darkgray !important;border:none;color:black"
-                        type="text" id="prevStockPreform05">
+                    <input class="technicalProduction_input" type="text" id="prevStockPreform05"
+                        disabled>
                 </td>
                 <td class="tg-73ax" style="background-color:darkgray !important">
-                    <input style="background-color:darkgray !important;border:none;color:black"
-                        type="text" id="prevStockPreform19">
+                    <input class="technicalProduction_input" type="text" id="prevStockPreform19"
+                        disabled>
                 </td>
             </tr>
             <tr>
                 <td class="tg-dc05">Stock de Bouteilles:</td>
                 <td class="tg-fm9z" style="background-color:darkgray !important">
-                    <input style="background-color:darkgray !important;border:none;color:black"
-                        type="text" id="prevStockBottle05">
+                    <input class="technicalProduction_input" type="text" id="prevStockBottle05"
+                        disabled>
                 </td>
                 <td class="tg-73ax" style="background-color:darkgray !important">
-                    <input style="background-color:darkgray !important;border:none;color:black"
-                        type="text" id="prevStockBottle19">
+                    <input class="technicalProduction_input" type="text" id="prevStockBottle19"
+                        disabled>
                 </td>
             </tr>
             <tr>
                 <td class="tg-dc05">Conducteurs:</td>
                 <td class="tg-fm9z"><input type="text" class="technicalProduction_input"
-                        name="conduc05" id="conduc05" value="<?php echo ($hasRecord) ? $currentData[0] : ""; ?>"></td>
+                        name="conduc05" id="conduc05" value="<?php echo $userDetails['surname'] . ' ' . $userDetails['name']; ?>"
+                        disabled></td>
                 <td class="tg-73ax"><input type="text" class="technicalProduction_input"
-                        name="conduc19" id="conduc19" value="<?php echo ($hasRecord) ? $currentData[1] : ""; ?>"></td>
+                        name="conduc19" id="conduc19" value="<?php echo $userDetails['surname'] . ' ' . $userDetails['name']; ?>"
+                        disabled></td>
+                <input type="hidden" name="conductor" value="<?php echo ($hasRecord) ? $currentData[0] : $_SESSION['status']; ?>" >
             </tr>
             <tr>
                 <td class="tg-dc05">Heure de Début</td>
                 <td class="tg-fm9z"><input type="time" class="technicalProduction_input"
-                        name="start05" id="start05" value="<?php echo ($hasRecord) ? $currentData[2] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="start05" id="start05" value="<?php echo ($hasRecord) ? $currentData[2] : "08:00:00"; ?>" autocomplete="off"></td>
                 <td class="tg-73ax"><input type="time" class="technicalProduction_input"
-                        name="start19" id="start19" value="<?php echo ($hasRecord) ? $currentData[3] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="start19" id="start19" value="<?php echo ($hasRecord) ? $currentData[3] : "08:00:00"; ?>" autocomplete="off"></td>
             </tr>
             <tr>
                 <td class="tg-dc05">Heure de Fin</td>
                 <td class="tg-fm9z"><input type="time" class="technicalProduction_input"
-                        name="end05" id="end05" value="<?php echo ($hasRecord) ? $currentData[4] : ""; ?>"></td>
+                        name="end05" id="end05" value="<?php echo ($hasRecord) ? $currentData[4] : "16:30:00"; ?>"></td>
                 <td class="tg-73ax"><input type="time" class="technicalProduction_input"
-                        name="end19" id="end19" value="<?php echo ($hasRecord) ? $currentData[5] : ""; ?>"></td>
+                        name="end19" id="end19" value="<?php echo ($hasRecord) ? $currentData[5] : "16:30:00"; ?>"></td>
             </tr>
             <tr>
                 <td class="tg-dc05">Quantité Produite</td>
@@ -161,42 +175,49 @@ while ($data = $req->fetch(PDO::FETCH_ASSOC))
                 <td class="tg-dc05">Nouveau stock de Pre&#769;forme</td>
                 <td class="tg-fm9z" style="background-color: darkgray;">
                     <input type="text" class="technicalProduction_input" name="newPreformStock05"
-                        id="newPreformStock05" readonly></td>
+                        id="newPreformStock05" disabled></td>
                 <td class="tg-73ax" style="background-color: darkgray;">
                     <input type="text" class="technicalProduction_input" name="newPreformStock19"
-                        id="newPreformStock19" readonly></td>
+                        id="newPreformStock19" disabled></td>
             </tr>
             <tr>
                 <td class="tg-dc05">Nouveau stock de Bouteilles</td>
                 <td class="tg-fm9z" style="background-color: darkgray;"><input
                         type="text" class="technicalProduction_input" name="newBottleStock05"
-                        id="newBottleStock05"></td>
+                        id="newBottleStock05" disabled></td>
                 <td class="tg-73ax" style="background-color: darkgray;"><input
                         type="text" class="technicalProduction_input" name="newBottleStock19"
-                        id="newBottleStock19" readonly></td>
+                        id="newBottleStock19" disabled></td>
             </tr>
             <tr>
                 <td class="tg-mv9o">Visa Chef de Ligne</td>
                 <td class="tg-jtts"><input type="text" class="technicalProduction_input"
-                        name="visa05" id="visa05" value="<?php echo ($hasRecord) ? $currentData[12] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="visa05" id="visa05" <?php echo ($hasRecord &&
+                                                        strlen($currentData[12]) > 0) ? 'value="' .
+                                                        $currentData[12] . '"' : 'placeholder="RAS"' ?>
+                    autocomplete="off"></td>
                 <td class="tg-ayio"><input type="text" class="technicalProduction_input"
-                        name="visa19" id="visa19" value="<?php echo ($hasRecord) ? $currentData[13] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="visa19" id="visa19" <?php echo ($hasRecord &&
+                                                        strlen($currentData[13]) > 0) ? 'value="' .
+                                                        $currentData[13] . '"' : 'placeholder="RAS"' ?>
+                    autocomplete="off"></td>
             </tr>
             <tr>
-                <td class="tg-mv9o">Responsable<br></td>
+                <td class="tg-mv9o">Responsable</td>
                 <td class="tg-jtts"><input type="text" class="technicalProduction_input"
-                        name="resp05" id="resp05" value="<?php echo ($hasRecord) ? $currentData[14] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="resp05" id="resp05" <?php echo ($hasRecord &&
+                                                        strlen($currentData[14]) > 0) ? 'value="' .
+                                                        $currentData[14] . '"' : 'placeholder="Abdoulaye Niang"';
+                                                    ?> autocomplete="off"></td>
                 <td class="tg-ayio"><input type="text" class="technicalProduction_input"
-                        name="resp19" id="resp19" value="<?php echo ($hasRecord) ? $currentData[15] : ""; ?>"
-                        autocomplete="off"></td>
+                        name="resp19" id="resp19" <?php echo ($hasRecord &&
+                                                        strlen($currentData[15]) > 0) ? 'value="' .
+                                                        $currentData[15] . '"' : 'placeholder="Abdoulaye Niang"';
+                                                    ?> autocomplete="off"></td>
             </tr>
         </table>
-        <!-- <button class="btn btn-success" onclick="printData();">Imprimer</button> -->
         <input type="button" name="submitProductionMonitoring" class="submitBtnProduction"
             onclick="formValidation();" value="<?php echo ($hasRecord) ? "
-            Mettre a jour" : "Enregistrer"; ?>">
+            Mettre à jour" : "Enregistrer"; ?>" >
     </form>
 </div>

@@ -113,7 +113,8 @@ require("source/model/handle-acces.php");
                 if (isset($_GET['action']) && $_GET['action'] == "view")
                     require_once("source/include/technic_pages/view_used_material_and_product.php");
             }
-        }
+        } else if (isset($_GET['disconnect']))
+            require_once('source/model/disconnect.php');
 
         ?>
         <!-- Return to Top -->

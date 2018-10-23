@@ -23,4 +23,19 @@ function get_data_per_line($date)
     return $line_data;
 }
 
+function get_data_today($num_line)
+{
+    $sql = "SELECT `mat_livreur` as a1, `mat_aide_livreur` as a2, `mat_chauffeur` as a3, `b_chargees` as a4, `b_livrees` as a5, `b_consignees` as a6, `b_deconsignees` as a7, `retour_b_pleines` as a8, `retour_b_vides` as a9, `retour_b_pretees` as a10, `b_pretees` as a11, `b_percees_voiture` as a12, `b_percees_entrepot` as a13, `b_perdues` as a14, `client_livre_sur_demande` as a15, `remarques` as a16 FROM `delivery_line$num_line` WHERE `date_delivery`=?";
 
+    date_default_timezone_set("Africa/Dakar");
+    $today = "2018-10-18";//date("Y-m-d"); 
+    $bd = connect();
+    $req = $bd->prepare($sql);
+    $req->execute(array($today));
+    $line_data = [];
+    while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        for ($i = 1; $i < 17; $i++)
+            array_push($line_data, $data["a$i"]);
+    }
+    return $line_data;
+}
