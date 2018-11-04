@@ -75,7 +75,10 @@
     }
 
     .tg .tg-j71d {
-        font-size: 20px;
+        font-weight: 900;
+        font-size: 28px;
+        font-style: italic;
+        line-height: 0.9;
         font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
         background-color: #f5f5f5;
         color: #8a2be2;
@@ -114,6 +117,12 @@
             -webkit-overflow-scrolling: touch;
             margin: auto 0px;
         }
+    }
+
+    .idRegion{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size:17px;
+        font-weight: 900;
     }
 
 </style>
@@ -244,7 +253,7 @@ require_once('source/model/delivery/M_set_delivery.php');
                             $index = $i + 1;
                             echo '<td class="row-btn">
                                     <div>
-                                        <button type="button" id="editer' . $index . '" onclick="edit(' . $index . ')" class="btn btn-primary">Éditer</button>
+                                        <button type="button" id="editer' . $index . '" onclick="edit(' . $index . ')" class="btn btn-primary edit-delivery-btn">Éditer</button>
                                         <button style="display:none" type="button" id="annuler' . $index . '" onclick="annuler(' . $index . ')" class="btn btn-danger">Annuler</button>
                                     </div>
                                 </td>';
@@ -256,10 +265,6 @@ require_once('source/model/delivery/M_set_delivery.php');
         </div>
     </div>
 </div>
-
-<?php
-require_once("new_delivery_region.php");
-?>
 
 <form id="new-delivery-form" method="post" action="source/model/delivery/M_add_delivery.php">
     <input type="hidden" name="date" id="date" value="<?php echo defaultDate; ?>">
@@ -296,8 +301,7 @@ require_once("new_delivery_region.php");
                     required>
                     <option value="">Se&#769;lectionner</option>;
                     <?php
-                    require_once("source/model/delivery/M_list_employe.php");
-                    $list = get_list();
+                    $list = get_list_employe();
                     for ($i = 0; $i < count($list); $i++) {
                         echo '<option value="' . $list[$i][4] . '">' . $list[$i][2] . ' ' . $list[$i][1] . '</option>';
                     }
@@ -317,6 +321,8 @@ require_once("new_delivery_region.php");
 </div>
 
 <?php
+require_once("new_delivery_region.php");
+
 //default employes's line setted by delivery responsable
 $preselectedEmploye = [
     ["2018-liv-0016", "2018-liv-0030", "2018-liv-0029"],

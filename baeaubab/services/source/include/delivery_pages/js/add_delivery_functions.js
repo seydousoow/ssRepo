@@ -157,7 +157,7 @@ function edit(index) {
 
 function save(index) {
     index = parseInt(index) - 1;
-    var row = document.getElementsByClassName("line" + index),
+    var row = document.getElementsByClassName("line" + (index + 1)),
         i = 3,
         t = 0,
         form_equiv = null;
@@ -181,7 +181,7 @@ function save(index) {
 function annuler(index) {
     swal({
         title: "Annuler",
-        text: "Vous êtes sur le point d'annuler vos modification souhaitez-vous continuer ?",
+        text: "Vous êtes sur le point d'annuler vos modifications souhaitez-vous continuer ?",
         type: "warning",
         buttons: ["Annuler", "Continuer"],
         dangerMode: false

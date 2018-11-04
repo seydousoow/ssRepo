@@ -6,9 +6,7 @@
 require_once('../init.php');
 if (isset($_POST)) {
     extract($_POST);
-
-    date_default_timezone_set("Africa/Dakar");
-    
+        
     //get all the datas entered by the administrator
     $table = 'delivery_line' . filter_var($ligne, FILTER_SANITIZE_NUMBER_INT);
     $livreur = strlen($livreur) ? filter_var($livreur, FILTER_SANITIZE_STRING) : "";
