@@ -102,12 +102,15 @@ footer div:last-child {
 }
 
 /*************************************** treatment system control **********************/
+<<<<<<< HEAD
 
 .tg-wrap {
     margin-top: 30px;
 }
 
 
+=======
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
 .tg-wrap:first-child {
     margin-bottom: 30px
 }
@@ -129,7 +132,11 @@ footer div:last-child {
     overflow: auto;
     word-break: normal;
     border-color: #999;
+<<<<<<< HEAD
     color: black;
+=======
+    color: #444;
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
     background-color: #F7FDFA;
 }
 
@@ -169,6 +176,7 @@ footer div:last-child {
     text-align: center
 }
 
+<<<<<<< HEAD
 td .tg-0lax:first-child {
     text-align: center
 }
@@ -211,6 +219,24 @@ td .tg-0lax:first-child {
 }
 
 
+=======
+.tg-nn11:nth-child(1) {
+    width: 40%;
+}
+
+.tg-nn11:nth-child(2) {
+    width: 15%;
+}
+
+.tg-nn11:nth-child(3) {
+    width: 17%;
+}
+
+.tg-nn11:nth-child(4) {
+    width: 7%;
+}
+
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
 .tg .tg-kqiv {
     font-weight: bold;
     font-size: 18px;
@@ -297,6 +323,7 @@ td .tg-0lax:first-child {
 .tg .tg-hmp3 {
     background-color: #D2E4FC;
     text-align: left;
+<<<<<<< HEAD
     vertical-align: top;
     padding: 0px;
     padding-top: 4px;
@@ -310,6 +337,15 @@ td .tg-0lax:first-child {
 .tg .tg-0lax {
     color: black;
     text-align: center
+=======
+    vertical-align: top
+}
+
+.tg .tg-0lax {
+    background-color: #ffffff;
+    text-align: left;
+    vertical-align: top
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
 }
 
 @media screen and (max-width: 767px) {
@@ -328,6 +364,7 @@ td .tg-0lax:first-child {
     }
 }
 
+<<<<<<< HEAD
 .control1,
 .control2 {
     width: 100%;
@@ -345,6 +382,8 @@ td .tg-0lax:first-child {
     margin: 32px 200px 20px 0px;
 }
 
+=======
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
 /************************************production monitoring sheet **********************/
 .tg {
     border-collapse: collapse;
@@ -591,7 +630,11 @@ td .tg-0lax:first-child {
 }
 
 #dateSelector {
+<<<<<<< HEAD
     width: 450px;
+=======
+    width: 340px;
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
     text-align: center;
     background-color: whitesmoke;
     color: #375a72;
@@ -912,6 +955,7 @@ td .tg-0lax:first-child {
     vertical-align: top
 }
 
+<<<<<<< HEAD
 #updateStockBtn {
     position: relative;
     top: 90px;
@@ -923,21 +967,36 @@ td .tg-0lax:first-child {
 }
 
 #stock-legend {
+=======
+#stock-legend{
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
     width: 500px;
     height: auto;
     position: relative;
     float: right;
+<<<<<<< HEAD
     right: 20%;
     top: 70px;
 }
 
 #stock-legend fieldset {
+=======
+    right: 200px;
+    top: 100px;
+}
+
+#stock-legend fieldset{
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
     width: 100%;
     border: 2px solid #375a72;
     padding-left: 10px;
 }
 
+<<<<<<< HEAD
 #stock-legend fieldset legend {
+=======
+#stock-legend fieldset legend{
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
     width: auto;
     margin: 0px auto;
     font-family: playfair display, Georgia, 'Times New Roman', Times, serif;
@@ -958,6 +1017,12 @@ td .tg-0lax:first-child {
     margin-right: 10px;
 }
 
+<<<<<<< HEAD
 .legend-container p {
     font-family: playfair fisplay, Georgia, 'Times New Roman', Times, serif;
 }
+=======
+.legend-container p{
+    font-family: playfair fisplay, Georgia, 'Times New Roman', Times, serif;
+}
+>>>>>>> e3f7cfcebdcf605c51133963f7ed652a0efe73dd
