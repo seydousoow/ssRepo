@@ -13,22 +13,27 @@
         margin-top: 10px;
     }
 
-    #dateSelector {
-        width: 300px;
-        text-align: center;
-        margin-right: 40px;
-        color: white;
-        font-family: georgia;
-        font-size: 14px;
-        font-weight: bold;
+    #dateSelector {    
+        width: 300px !important;
+        text-align: center !important;
+        margin-right: 5px !important;
+        background-color: white !important;
+        color: blueviolet !important;
+        font-family: playfair display, Times, georgia, helvetica, serif !important;
+        font-size: 15px !important;
+        font-weight: bolder !important;
+        border: 3px solid blueviolet !important;
+        border-radius: 23px !important;
     }
 
     #showBtn {
         color: white;
-        font-family: georgia;
-        font-size: 16px;
+        font-family: playfair display, times, georgia, serif;
+        font-size: 17px;
         font-weight: bold;
-        letter-spacing: 0.4px;
+        border: 1px solid blueviolet;
+        border-radius: 25px;
+        background-color: blueviolet;
     }
 
     /**************************************new delivery region ********************************/
@@ -50,6 +55,7 @@
         border-color: #999;
         color: #444;
         background-color: #F7FDFA;
+        border: 1px solid blueviolet;
     }
 
     .tg th {
@@ -71,7 +77,8 @@
         font-size: 13px;
         font-family: Georgia, serif !important;
         border-color: inherit;
-        text-align: left
+        border: 1px solid blueviolet;
+        text-align: left;
     }
 
     .tg .tg-j71d {
@@ -100,7 +107,8 @@
         font-size: 13px;
         font-family: Georgia, serif !important;
         border-color: inherit;
-        text-align: left
+        text-align: left;
+        border: 1px solid blueviolet;
     }
 
     @media screen and (max-width: 767px) {
@@ -123,6 +131,9 @@
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size:17px;
         font-weight: 900;
+        background-color: grey;
+        border: 1px solid blueviolet;
+        color: whitesmoke;
     }
 
 </style>
@@ -363,3 +374,4 @@ for ($i = 1; $i < 16; $i++) {
 </script>
 
 <script src="source/include/delivery_pages/js/add_delivery_functions.js"></script>
+<script src="source/include/delivery_pages/js/delivery_auto_calculation.js"></script>

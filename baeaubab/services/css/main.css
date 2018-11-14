@@ -212,13 +212,17 @@ footer div:last-child {
 .delivery-employe-title {
     padding-top: .75rem;
     padding-bottom: .75rem;
-    color: blueviolet;
-    text-align: center;
-    font-family: georgia, times new roman, times;
-    font-size: 20px;
-    font-weight: 600;
     text-decoration: underline;
     caption-side: top;
+    font-weight: 900;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 0.9;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+    background-color: #f5f5f5;
+    color: #8a2be2;
+    border-color: #000000;
+    text-align: center;
 }
 
 .new-emplo-input-group {
@@ -337,6 +341,7 @@ footer div:last-child {
 
 #new-delivery-main-container .delivery-employe-title {
     background-color: whitesmoke;
+    margin-bottom: 0px;
 }
 
 #new-delivery-container table {
@@ -378,10 +383,9 @@ textarea.form-control {
 }
 
 .theadY-liv {
-    font-size: 13px;
+    font-size: 17px;
     vertical-align: middle !important;
-    font-family: georgia;
-    font-weight: bold;
+    font-family: georgia, times, serif !important;
     color: blue;
     height: 41.6px !important;
 }
@@ -389,19 +393,62 @@ textarea.form-control {
 
 #new-delivery-first-column thead tr th,
 #new-delivery-table thead tr th {
+    background-color: #3166ff;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
+    color: #f7fdfa;
+    border-color: #000000;
     text-align: center;
-    color: blue;
+    border: 1px solid black;
 }
 
-#new-delivery-table tbody tr td div .form-control {
+#new-delivery-first-column thead tr th {
+    border-right: 1px solid #3166ff;
+}
+
+#new-delivery-table tbody tr td div .form-control,
+#new-delivery-region-table tbody tr td div .form-control,
+.totalRegion {
     height: 30px;
     font-size: 13px;
     font-family: georgia;
     padding: 2px 2px 2px 4px;
+    color: blueviolet;
+}
+
+#new-delivery-region-table td td {
+    border: 1px solid blueviolet;
+}
+
+#new-delivery-region-table tbody tr td .form-control-plaintext {
+    font-size: 13px;
+    font-family: georgia;
+    padding: 2px 2px 2px 4px;
+    color: blueviolet;
+}
+
+.form-control.isInt {
+    height: 30px;
+    font-size: 13px;
+    font-family: georgia;
+    padding: 2px 2px 2px 4px;
+    color: blueviolet;
+}
+
+#new-delivery-region-table tbody tr td:first-child {
+    color: blue;
+    font-size: 17px;
+    font-family: georgia, times, serif !important;
+    vertical-align: middle;
 }
 
 #new-delivery-table tbody tr {
     height: 41.6px !important;
+}
+
+#new-delivery-region-table tbody tr {
+    height: 35px
 }
 
 /* The Modal (background) */

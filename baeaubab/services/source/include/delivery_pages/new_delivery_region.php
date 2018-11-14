@@ -10,7 +10,7 @@ $listDataRegion = getDataForSelectedDate($listRegion);
     $designations = ["Re&#769;gion", "Livreur", "Aide Livreur", "Chauffeur", "Bouteilles Charge&#769;es", "Bouteilles Livre&#769;es", "Bouteilles Consigne&#769;es", "Bouteilles De&#769;consigne&#769;es", "Retour Bouteilles Pleines", "Retour Bouteilles Vides", "Retour Bouteilles Prê&#769;te&#769;es", "Bouteilles Prê&#769;te&#769;es", "Bouteilles Perce&#769;es en entrepôt", "Bouteilles Perce&#769;es en voiture", "Bouteilles Perdues", "Client Livre&#769;s sur Demande", "Remarques"];
     ?>
     <div class="tg-wrap">
-        <table class="tg table table-responsive" style="width:100%;overflow-x:scroll">
+        <table id="new-delivery-region-table" class="tg table table-responsive" style="width:100%;overflow-x:scroll">
             <colgroup>
                 <col style="width: 240px">
                 <col style="width: auto">
@@ -26,12 +26,11 @@ $listDataRegion = getDataForSelectedDate($listRegion);
                 <th class="tg-j71d" colspan="9"><span style="font-weight:bold;text-decoration:underline">Enregistrement
                         des lignes de livraison du <script>
                             document.write(frenchDateFormat);
-                        </script>
-                        des autres régions</span></th>
+                        </script> hors Dakar</span></th>
             </tr>
 
             <tr>
-                <td class="tg-iqjh">De&#769;signations</td>
+                <td class="tg-iqjh" style="color: whitesmoke;">De&#769;signations</td>
                 <td class="tg-iqjh">Ligne </td>
                 <td class="tg-iqjh">Ligne</td>
                 <td class="tg-iqjh">Ligne</td>
